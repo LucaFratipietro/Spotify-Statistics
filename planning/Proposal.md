@@ -1,7 +1,7 @@
-# Spotify Favorites
+# Spotify Favourites
 
 ## Data
-Link to issue: https://gitlab.com/csy3dawson23-24/520/teams/TeamL22-AdrianoLuca/520-project-dalonzo-fratipietro/-/issues/4
+Link to issue(https://gitlab.com/csy3dawson23-24/520/teams/TeamL22-AdrianoLuca/520-project-dalonzo-fratipietro/-/issues/4)
 
 ### Summary
 This project uses Spotify playlist data to track the genres, names and other 
