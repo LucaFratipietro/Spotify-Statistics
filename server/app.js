@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const port = 3000;
 import songs from './routes/songs.js';
 
