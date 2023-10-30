@@ -34,7 +34,7 @@ server-side-test:
     expire_in: 1 week
     when: always
     paths:
-      - ./junit.xml
+      - '**/junit.xml'
 
 client-side-build:
   stage: build
