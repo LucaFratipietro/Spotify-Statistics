@@ -7,10 +7,12 @@ const db = new DB();
 export async function year(req, res) {
   try{
     const songs = await db.getAllSongs();
-    res.json(songs);
+    const array = await songs.toArray();
+    res.type('json');
+    res.json(array);
   } catch (e) {
     console.error(e.message);
     //send status sends the string representation of the status code as the body
-    res.sendStatus(500).end();
+    res.sendStatus(500).json({error: e.message});
   }
 }
