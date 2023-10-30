@@ -29,12 +29,7 @@ server-side-test:
   stage: test
   script:
     - cd server && npm ci --cache .npm --prefer-offline
-    - ./node_modules/jest/bin/jest.js --reporters=default --reporters=jest-junit
-  artifacts:
-    expire_in: 1 week
-    when: always
-    paths:
-      - '**/junit.xml'
+    - npm run test
 
 client-side-build:
   stage: build
