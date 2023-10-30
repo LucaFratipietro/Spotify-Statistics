@@ -20,8 +20,6 @@ lint-server:
 lint-client:
   stage: lint 
   script:
-    - pwd
-    - ls -al
     - cd client && ./node_modules/eslint/bin/eslint.js --ext js,jsx,mjs,cjs .
   allow_failure: false
 
