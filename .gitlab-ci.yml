@@ -14,12 +14,14 @@ workflow:
 lint-server:
   stage: lint 
   script:
+    - npm install
     - cd server && ./node_modules/eslint/bin/eslint.js --ext js,mjs,cjs . 
   allow_failure: false
 
 lint-client:
   stage: lint 
   script:
+    - npm install
     - cd client && ./node_modules/eslint/bin/eslint.js --ext js,jsx,mjs,cjs .
   allow_failure: false
 
