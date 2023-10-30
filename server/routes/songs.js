@@ -1,6 +1,10 @@
 import express from 'express';
 const router = express.Router();
 
-router.get('/songs/year?genre');
+import * as songsController from '../controllers/songController.js';
 
-//export router;
+//get all songs for a certain year
+//optional query to specify genre
+router.get('/year', songsController.year);
+
+export default router;
