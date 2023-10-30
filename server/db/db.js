@@ -1,6 +1,7 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 const dbUrl = process.env.ATLAS_URL;
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 
 let instance = null;
 
@@ -35,7 +36,7 @@ class DB {
     return await instance.collection.insertMany(data);
   }
 
-  async getAllData() {
+  async getAllSongs() {
     return await instance.collection.find().project({_id: 0});
   }
 
@@ -44,4 +45,4 @@ class DB {
   }
 }
 
-module.exports.DB = DB;
+export {DB};

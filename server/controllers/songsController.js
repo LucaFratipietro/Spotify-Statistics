@@ -1,5 +1,5 @@
-import DB from '../db/db';
-const db = DB();
+import {DB} from '../db/db.js';
+const db = new DB();
 
 //  fetch all the songs from the DB
 //  query params allows to specify from a genre
