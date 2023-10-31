@@ -5,7 +5,11 @@ const app = express();
 
 app.use('/songs', songs);
 
-app.use(express.static('../client/public'));
+app.get('/', (req, res, next) => {
+  next();
+});
+
+app.use(express.static('../client/build'));
 
 //if route is not defined above, return a 404 error message
 app.use(function (req, res) {

@@ -29,7 +29,7 @@ export async function allSongsByGenre(req, res){
 
     if(songsByGenre.length === 0){
       res.type('json');
-      res.status(400).json({error: `Genre ${req.params.genre} 
+      res.status(500).json({error: `Genre ${req.params.genre} 
       did not return any results. Try another genre`});
       return;
     }
