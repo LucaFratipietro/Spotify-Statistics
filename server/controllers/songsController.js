@@ -19,11 +19,21 @@ export async function allSongsByGenre(req, res){
   try{
     let songsByGenre = await db.getAllSongs(req.params.genre);
     songsByGenre = await songsByGenre.toArray();
+    
+    //check if query param for year was passed, if so, filter results by year
+    if(req.query.year){
+      songsByGenre = songsByGenre.filter((song) => {
+        return song.release_date.includes(req.query.year);
+      });
+    }
+
     if(songsByGenre.length === 0){
       res.type('json');
-      res.status(400).json({error: `Genre ${req.params.genre} did not return any results. Try another genre`});
+      res.status(400).json({error: `Genre ${req.params.genre} 
+      did not return any results. Try another genre`});
       return;
     }
+
     res.type('json');
     res.json(songsByGenre);
   } catch (e) {
