@@ -3,13 +3,13 @@ import songs from './routes/songs.js';
 
 const app = express();
 
-app.use('/songs', songs);
-
 app.get('/', (req, res, next) => {
   next();
 });
 
 app.use(express.static('../client/build'));
+
+app.use('/songs', songs);
 
 //if route is not defined above, return a 404 error message
 app.use(function (req, res) {
