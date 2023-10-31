@@ -2,17 +2,32 @@ import {DB} from '../db/db.js';
 const db = new DB();
 
 //  fetch all the songs from the DB
-//  query params allows to specify from a genre
-
-export async function year(req, res) {
+export async function allSongs(req, res) {
   try{
     const songs = await db.getAllSongs();
-    const array = await songs.toArray();
+    const json = await songs.toArray();
     res.type('json');
-    res.json(array);
+    res.json(json);
   } catch (e) {
     console.error(e.message);
-    //send status sends the string representation of the status code as the body
+    res.sendStatus(500).json({error: e.message});
+  }
+}
+
+export async function allSongsByGenre(req, res){
+
+  try{
+    let songsByGenre = await db.getAllSongs(req.params.genre);
+    songsByGenre = await songsByGenre.toArray();
+    if(songsByGenre.length === 0){
+      res.type('json');
+      res.status(400).json({error: `Genre ${req.params.genre} did not return any results. Try another genre`});
+      return;
+    }
+    res.type('json');
+    res.json(songsByGenre);
+  } catch (e) {
+    console.error(e.message);
     res.sendStatus(500).json({error: e.message});
   }
 }

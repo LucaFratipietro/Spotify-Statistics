@@ -36,8 +36,12 @@ class DB {
     return await instance.collection.insertMany(data);
   }
 
-  async getAllSongs() {
-    return await instance.collection.find().project({_id: 0});
+  //year is an optional paramter, if genre passed in, fetch songs with that genre
+  async getAllSongs(genre = "") {
+    if(genre === ""){
+      return await instance.collection.find().project({_id: 0});
+    }
+    return await instance.collection.find({Genre: genre});
   }
 
   async deleteAllData() {
