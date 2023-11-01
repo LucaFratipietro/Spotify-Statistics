@@ -5,8 +5,11 @@ const db = new DB();
 export async function allSongs(req, res) {
   try{
     let allSongs = await db.getAllSongs();
-    allSongs = await allSongs.toArray();
-
+    
+    if(!Array.isArray(allSongs)){
+      allSongs = await allSongs.toArray();
+    }
+    
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
       allSongs = allSongs.filter((song) => {
@@ -56,3 +59,9 @@ export async function allSongsByGenre(req, res){
     res.sendStatus(500).json({error: e.message});
   }
 }
+
+export async function topSongsByYear(req, res){
+  //STUB: NOT IMPLEMENTED
+}
+
+
