@@ -1,4 +1,4 @@
-import { DB } from '../db/db';
+import { DB } from '../db/db.js';
 import XLSX from 'xlsx';
 
 export async function readDataFromFile(url) {
@@ -28,4 +28,4 @@ const fillDB = async () => {
   }
 };
 
-fillDB();
+// fillDB();
