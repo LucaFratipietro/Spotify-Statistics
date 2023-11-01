@@ -26,20 +26,19 @@ export default function Songs(){
       alert(error);
     }
   }
-  
-  const songsList = songs.map((song) => {
-    <>
+
+  const songsList = songs.map((song, index) => {
+
+    <div key={index}>
       <p>{song.Title}</p>
       <p>{song.Genre}</p>
       <img src={song.Album_cover_link} alt={song.Title}/>
-    </>;
+    </div>;
   });
-
-  console.log(songsList);
 
   return(
     <>
-      <p>Some of the best songs of 2002?</p>
+      <p>Three Songs fetched from /songs?year=2002 route</p>
       {songsList}
     </>
   );
