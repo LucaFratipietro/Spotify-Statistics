@@ -1,6 +1,7 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 const dbUrl = process.env.ATLAS_URL;
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 
 let instance = null;
 
@@ -35,8 +36,12 @@ class DB {
     return await instance.collection.insertMany(data);
   }
 
-  async getAllData() {
-    return await instance.collection.find().project({_id: 0});
+  //genre is an optional paramter, if genre passed in, fetch songs with that genre
+  async getAllSongs(genre = '') {
+    if(genre === ''){
+      return await instance.collection.find().project({_id: 0});
+    }
+    return await instance.collection.find({Genre: genre});
   }
 
   async deleteAllData() {
@@ -44,4 +49,4 @@ class DB {
   }
 }
 
-module.exports.DB = DB;
+export {DB};
