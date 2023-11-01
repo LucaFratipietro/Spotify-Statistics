@@ -45,4 +45,3 @@ client-side-build:
     when: on_success
     paths:
       - client/build
-
