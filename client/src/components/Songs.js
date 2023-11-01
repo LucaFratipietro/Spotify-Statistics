@@ -28,12 +28,13 @@ export default function Songs(){
   }
 
   const songsList = songs.map((song, index) => {
-
-    <div key={index}>
-      <p>{song.Title}</p>
-      <p>{song.Genre}</p>
-      <img src={song.Album_cover_link} alt={song.Title}/>
-    </div>;
+    return (
+      <div key={index}>
+        <p>{song.Title}</p>
+        <p>{song.Genre}</p>
+        <img src={song.Album_cover_link} alt={song.Title}/>
+      </div>
+    );
   });
 
   return(
