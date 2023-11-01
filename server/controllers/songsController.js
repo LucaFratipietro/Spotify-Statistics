@@ -60,8 +60,8 @@ export async function allSongsByGenre(req, res){
   }
 }
 
-export async function topSongsByYear(req, res){
+/*export async function topSongsByYear(req, res){
   //STUB: NOT IMPLEMENTED
-}
+}*/
 
 
