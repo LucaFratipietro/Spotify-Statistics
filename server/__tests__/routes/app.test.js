@@ -1,9 +1,9 @@
 import request from 'supertest';
-import {jest} from '@jest/globals';
+import { jest } from '@jest/globals';
 import app from '../../app.js';
-import {DB} from '../../db/db.js';
+import { DB } from '../../db/db.js';
 
-jest.mock('../../db/db.js');
+jest.mock('../../db/db');
 
 //mocking of the songs routes
 
