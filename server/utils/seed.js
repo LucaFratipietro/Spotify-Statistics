@@ -28,4 +28,5 @@ const fillDB = async () => {
   }
 };
 
-// fillDB();
+const i = 0;
+if( i === 1) fillDB();
