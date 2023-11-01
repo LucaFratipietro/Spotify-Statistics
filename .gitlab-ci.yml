@@ -34,9 +34,7 @@ server-side-test:
 client-side-build:
   stage: build
   script:
-    - cd client
-    - npm ci --cache .npm --prefer-offline
-    - npm run build
+    - cd client && npm run build
   only:
     refs:
       - staging
