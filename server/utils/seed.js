@@ -1,17 +1,17 @@
-const { DB } = require('../db/db');
-const XLSX = require('xlsx');
+import { DB } from '../db/db';
+import XLSX from 'xlsx';
 
-async function readDataFromFile() {
-  const workBook = XLSX.readFile('./server/data/spotify_genre_final.xlsx');
+export async function readDataFromFile(url) {
+  const workBook = XLSX.readFile(url);
   const sheetName = workBook.SheetNames[0];
   const jsonData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetName]);
   return jsonData;
 }
 
-(async () => {
+const fillDB = async () => {
   let db;
   try {
-    const data = await readDataFromFile();
+    const data = await readDataFromFile('data/spotify_genre_final.xlsx');
     db = new DB();
     await db.connect('webdev-project-cluster', 'spotify-data');
     const num = await db.insertData(data);
@@ -26,4 +26,6 @@ async function readDataFromFile() {
     }
     process.exit();
   }
-})();
+};
+
+fillDB();
