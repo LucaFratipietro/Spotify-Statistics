@@ -19,7 +19,7 @@ async function readDataFromFile() {
   } catch (error) {
     console.log(error);
     console.error('Could not seed data');
-    console.dir(e);
+    console.dir(error);
   } finally {
     if(db) {
       await db.close();

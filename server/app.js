@@ -7,7 +7,7 @@ app.get('/', (req, res, next) => {
   next();
 });
 
-app.use(express.static('../client/build'));
+app.use(express.static('./client/build'));
 
 app.use('/songs', songs);
 
