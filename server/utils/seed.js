@@ -1,7 +1,7 @@
-import { DB } from '../db/db.js';
-import XLSX from 'xlsx';
+const { DB } = require('../db/db.js');
+const XLSX = require('xlsx');
 
-export async function readDataFromFile(url) {
+async function readDataFromFile(url) {
   const workBook = XLSX.readFile(url);
   const sheetName = workBook.SheetNames[0];
   const jsonData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetName]);
@@ -28,4 +28,7 @@ const fillDB = async () => {
   }
 };
 
-fillDB();
+const i = 0;
+if ( i === 1 ) fillDB();
+
+module.exports = { readDataFromFile };
