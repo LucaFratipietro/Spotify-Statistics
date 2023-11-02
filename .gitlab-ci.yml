@@ -2,8 +2,8 @@ image: node:18-bullseye-slim
 
 stages:
   - lint
-  - test
   - build
+  - test
 
 workflow:
   rules:
@@ -35,9 +35,6 @@ client-side-build:
   stage: build
   script:
     - cd client && npm run build
-  only:
-    refs:
-      - staging
   artifacts:
     expire_in: 1 days
     when: on_success
