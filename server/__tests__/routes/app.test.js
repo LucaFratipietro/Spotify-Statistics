@@ -1,11 +1,9 @@
 // Disabled due to field in song object being called after that name
 // Can change in the future
 /* eslint-disable camelcase */
-
-import request from 'supertest';
-import { jest } from '@jest/globals';
-import app from '../../app.js';
-import { DB } from '../../db/db.js';
+const request = require('supertest');
+const app = require('../../app.js');
+const { DB } = require('../../db/db.js');
 
 jest.mock('../../db/db');
 

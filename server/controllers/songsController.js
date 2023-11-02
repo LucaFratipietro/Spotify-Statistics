@@ -1,8 +1,8 @@
-import {DB} from '../db/db.js';
+const {DB} = require('../db/db.js');
 const db = new DB();
 
 //  fetch all the songs from the DB
-export async function allSongs(req, res) {
+async function allSongs(req, res) {
   try{
     let allSongs = await db.getAllSongs();
     
@@ -32,7 +32,7 @@ export async function allSongs(req, res) {
   }
 }
 
-export async function allSongsByGenre(req, res){
+async function allSongsByGenre(req, res){
 
   try{
     let songsByGenre = await db.getAllSongs(req.params.genre);
@@ -63,8 +63,11 @@ export async function allSongsByGenre(req, res){
   }
 }
 
-/*export async function topSongsByYear(req, res){
+/*async function topSongsByYear(req, res){
   //STUB: NOT IMPLEMENTED
 }*/
 
-
+module.exports = {
+  allSongs,
+  allSongsByGenre
+};

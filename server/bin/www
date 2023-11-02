@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import app from '../app.js';
-import {DB} from '../db/db.js';
+const app = require('../app.js');
+const {DB} = require('../db/db.js');
 const port = process.env.PORT || 3000;
 
 (async () => {

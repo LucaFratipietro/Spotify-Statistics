@@ -1,4 +1,4 @@
-import { readDataFromFile } from '../../utils/seed';
+const { readDataFromFile } = require('../../utils/seed');
 
 describe('Testing loading module function', () => {
   test('Should return expected data', async () => {

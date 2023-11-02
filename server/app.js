@@ -1,5 +1,5 @@
-import express from 'express';
-import songs from './routes/songs.js';
+const express = require('express');
+const songs = require('./routes/songs.js');
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(function (req, res) {
   res.status(404).json({error: 'Sorry, resource cannot be found'});
 });
 
-export default app;
+module.exports = app;
 /*app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });*/

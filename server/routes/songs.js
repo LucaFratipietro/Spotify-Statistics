@@ -1,11 +1,11 @@
-import express from 'express';
-const router = express.Router();
+const express = require('express');
+const songsController = require('../controllers/songsController.js');
 
-import * as songsController from '../controllers/songsController.js';
+const router = express.Router();
 
 //get all songs for a certain year
 //optional query to specify genre
 router.get('/', songsController.allSongs);
 router.get('/:genre', songsController.allSongsByGenre);
 
-export default router;
+module.exports = router;
