@@ -11,13 +11,12 @@ app.use(express.static('./client/build'));
 
 app.use('/songs', songs);
 
-//if route is not defined above, return a 404 error message
+/**
+ * Middleware to display 404 message when an unexpected endpoint is reached
+ */
 app.use(function (req, res) {
   res.type('json');
   res.status(404).json({error: 'Sorry, resource cannot be found'});
 });
 
 module.exports = app;
-/*app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});*/

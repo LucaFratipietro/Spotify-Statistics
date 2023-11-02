@@ -3,6 +3,9 @@ const app = require('../app.js');
 const {DB} = require('../db/db.js');
 const port = process.env.PORT || 3000;
 
+/**
+ * IIFE to connect to DB and start the server listening on port 3000
+ */
 (async () => {
   try {
     const db = new DB();

@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+/**
+ * React component to display songs using API
+ */
 export default function Songs(){
 
 
