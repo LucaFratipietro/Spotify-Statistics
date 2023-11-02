@@ -7,18 +7,14 @@ const { DB } = require('../../db/db.js');
 
 jest.mock('../../db/db');
 
-//mocking of the songs routes
-
-const songsMockDB = [
-  { Genre : 'rock', Title : 'The first Song', Artist : 'The Who'},
-  { Genre : 'pop', Title : 'The second', Artist : 'The Strokes'},
-  { Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!'}
-];
-
 //Get all songs
 describe('GET /songs', () => {
   test('It should respond with all songs json array', async () => {
-    jest.spyOn(DB.prototype, 'getAllSongs').mockResolvedValue(songsMockDB);
+    jest.spyOn(DB.prototype, 'getAllSongs').mockResolvedValue(
+      [{ Genre : 'rock', Title : 'The first Song', Artist : 'The Who'},
+        { Genre : 'pop', Title : 'The second', Artist : 'The Strokes'},
+        { Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!'}]
+    );
 
     const response = await request(app).get('/songs');
     expect(response.body).toEqual(
