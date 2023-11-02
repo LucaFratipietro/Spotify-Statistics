@@ -1,7 +1,12 @@
 const {DB} = require('../db/db.js');
 const db = new DB();
 
-//  fetch all the songs from the DB
+/**
+ * Makes a call to the DB object for all songs from the DB
+ *
+ * @param {string} Year - Optional querey
+ * @returns {JSON} - returns all songs from the DB, if year is specified, only from that year
+ */
 async function allSongs(req, res) {
   try{
     let allSongs = await db.getAllSongs();
@@ -31,6 +36,13 @@ async function allSongs(req, res) {
     res.sendStatus(500).json({error: e.message});
   }
 }
+
+/**
+ * Makes a call to the DB object for all songs from the DB by genre
+ * @param {string} Genre - Required enpoint param
+ * @param {string} Year - Optional query param
+ * @returns {JSON} - returns all songs from the DB of a specific genre
+ */
 
 async function allSongsByGenre(req, res){
 
