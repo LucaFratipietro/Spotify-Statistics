@@ -7,7 +7,7 @@ There are two directories in the root of the project.
 
 The Express server is in server/
 
-The React app is in ``
+The React app is in `client/build`
 The server responsd to API calls and serves the built React app.
 
 Setup
@@ -18,18 +18,17 @@ npm run build
 To run the app
 
 Just the client
-If metro-map-client/package.json has a proxy line, remove it.
 
-cd metro-map-client
+cd client
 npm start
 
 Just the server
 
-Fill this in
-
+in the base of the repo
+npm run start -- runs the server on localhost:3000
 
 Client and Server
 
-Fill this in
+npm run start
 
-NOTE: WE USE WWW.JS BECAUSE OF TYPE: MODULE IN THE PACKAGE.JSON, THANKS ESM
+
