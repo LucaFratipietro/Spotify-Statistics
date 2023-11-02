@@ -7,7 +7,9 @@ const { DB } = require('../../db/db.js');
 
 jest.mock('../../db/db');
 
-//Get all songs
+/**
+ * Unit test to test /songs API endpoint returns songs in JSON format
+ */
 describe('GET /songs', () => {
   test('It should respond with all songs json array', async () => {
     jest.spyOn(DB.prototype, 'getAllSongs').mockResolvedValue(
@@ -28,7 +30,9 @@ describe('GET /songs', () => {
   });
 });
 
-//Get all songs -- year query 
+/**
+ * Unit test to test /songs API endpoint returns songs in JSON format with year query parameter
+ */
 describe('GET /songs', () => {
   test('Respond all objects with release_date being 2002', async () => {
     jest.spyOn(DB.prototype, 'getAllSongs').mockResolvedValue(

@@ -1,5 +1,8 @@
 const { readDataFromFile } = require('../../utils/seed');
 
+/**
+ * Unit test to test seeding module for DB returns expected data from test file
+ */
 describe('Testing loading module function', () => {
   test('Should return expected data', async () => {
     const dataFromFile = await readDataFromFile('data/test_data.xlsx');
@@ -10,6 +13,9 @@ describe('Testing loading module function', () => {
   });
 });
 
+/**
+ * Unit test to test seeding module for DB returns undefined data with provided empty file
+ */
 describe('Testing loading module function', () => {
   test('Should return no values', async () => {
     const dataFromFile = await readDataFromFile('data/empty_data.xlsx');

@@ -1,6 +1,12 @@
 const { DB } = require('../db/db.js');
 const XLSX = require('xlsx');
 
+/**
+ * Async function used to convert xlsx (Excel) files to JSON data
+ * 
+ * @param {string} url | location of file to convert
+ * @returns {JSON} JSON data of xlsx data
+ */
 async function readDataFromFile(url) {
   const workBook = XLSX.readFile(url);
   const sheetName = workBook.SheetNames[0];
@@ -8,6 +14,9 @@ async function readDataFromFile(url) {
   return jsonData;
 }
 
+/**
+ * Method to occupy MongoDB Cluster with data from Spotify xlsx file
+ */
 const fillDB = async () => {
   let db;
   try {
