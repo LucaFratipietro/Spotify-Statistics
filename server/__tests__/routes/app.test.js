@@ -1,11 +1,17 @@
 import request from 'supertest';
-import {jest} from '@jest/globals';
-import app from '../app.js';
-import {DB} from '../db/db.js';
+import { jest } from '@jest/globals';
+import app from '../../app.js';
+import { DB } from '../../db/db.js';
 
-jest.mock('../db/db.js');
+jest.mock('../../db/db');
 
 //mocking of the songs routes
+
+const songsMockDB = [
+  { Genre : 'rock', Title : 'The first Song', Artist : 'The Who'},
+  { Genre : 'pop', Title : 'The second', Artist : 'The Strokes'},
+  { Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!'}
+];
 
 //Get all songs
 describe('GET /songs', () => {
