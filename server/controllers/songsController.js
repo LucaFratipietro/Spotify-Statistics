@@ -36,7 +36,10 @@ export async function allSongsByGenre(req, res){
 
   try{
     let songsByGenre = await db.getAllSongs(req.params.genre);
-    songsByGenre = await songsByGenre.toArray();
+    
+    if(!Array.isArray(songsByGenre)){
+      songsByGenre = await songsByGenre.toArray();
+    }
     
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
