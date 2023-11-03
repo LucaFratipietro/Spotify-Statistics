@@ -1,0 +1,13 @@
+{
+  "name": "520-project-dalonzo-fratipietro",
+  "version": "1.0.0",
+  "description": "520 Project\r Express + React app\r Description:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/bin/www",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install"
+  },
+  "author": "Adriano D'Alonzo, Luca Fratipietro",
+  "license": "ISC"
+}

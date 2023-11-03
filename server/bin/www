@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+const app = require('../app.js');
+const {DB} = require('../db/db.js');
+const port = process.env.PORT || 3000;
+
+/**
+ * IIFE to connect to DB and start the server listening on port 3000
+ */
+(async () => {
+  try {
+    const db = new DB();
+    await db.connect('webdev-project-cluster', 'spotify-data');
+  } catch (error) {
+    console.error('could not connect');
+    console.dir(error);
+    process.exit();
+  }
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}!`);
+  });
+})();
