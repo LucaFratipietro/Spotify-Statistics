@@ -28,3 +28,13 @@ Note taker: Luca
 ## discussion / work
 * We found a good dependency to use for our chart visualization, Chart.js
 * For now, we will use Adri's account for the data
+
+# 2023-11-01 Wednesday 3:00, 8 hours ;( , online
+Attendees: Adriano, Luca
+Note taker: Adriano
+## Problems
+* Mocking DB in ESM not passing (always trying to connect to DB)
+* Unit tests not passing
+* CI jobs not passing
+## discussion / work
+* Finish Phase 1 (implement 2 GET routes, basic React component, basic full-stack functionality)
