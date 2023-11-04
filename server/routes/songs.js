@@ -7,5 +7,6 @@ const router = express.Router();
 //optional query to specify genre
 router.get('/', songsController.allSongs);
 router.get('/:genre', songsController.allSongsByGenre);
+router.get('/years', songsController.allYears);
 
 module.exports = router;

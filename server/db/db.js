@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 require('dotenv').config();
 const { MongoClient } = require('mongodb');
 
@@ -41,6 +42,10 @@ class DB {
       return await instance.collection.find().project({ _id: 0 });
     }
     return await instance.collection.find({ Genre: genre });
+  }
+
+  async getAllYears() {
+    return instance.collection.find().project({ release_date: 1 });
   }
 
   /**
