@@ -104,6 +104,5 @@ async function allSongsByGenre(req, res){
 
 module.exports = {
   allSongs,
-  allSongsByGenre,
-  allYears
+  allSongsByGenre
 };
