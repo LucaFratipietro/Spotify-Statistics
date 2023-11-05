@@ -11,7 +11,6 @@ export default function NavBar({handler}) {
     const formData = new FormData(form);
 
     const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson);
 
     //use handler to update genre and decade
     handler(formJson.genre, formJson.decade);
@@ -28,15 +27,22 @@ export default function NavBar({handler}) {
             <option value="AllSongs">All</option>
             <option value="rock">Rock</option>
             <option value="pop">Pop</option>
-            <option value="rnb">RnB</option>
+            <option value="edm">Edm</option>
+            <option value="latin">Latin</option>
+            <option value="rap">Rap</option>
+            <option value="hiphop">Hiphop</option>
+            <option value="rnb">R&B</option>
           </select>
         </label>
         <label className="searchLabel"> Decade:
           <select id="genre" name="decade">
             <option value="AllYears">All</option>
-            <option value="1980">1980</option>
-            <option value="1990">1990</option>
-            <option value="2000">2000</option>
+            <option value="1970">70s</option>
+            <option value="1980">80s</option>
+            <option value="1990">90s</option>
+            <option value="2000">00s</option>
+            <option value="2010">10s</option>
+            <option value="2020">20s</option>
           </select>
         </label>
         <button type="submit">Discover</button>
