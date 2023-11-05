@@ -2,15 +2,17 @@ import '../styling/Navbar.css';
 
 export default function NavBar({handler}) {
 
-  const handleChange = (event) => handler();
+  function handleSubmuit(e){
+    
+  }
 
   return (
     <nav>
-      <h1>
+      <p>
       Spotify Favourites
-      </h1>
+      </p>
       <form id="searchForm">
-        <label> Genre:
+        <label className="searchLabel"> Genre:
           <select id="genre" name="genrelist" form="searchform">
             <option value="AllSongs">All</option>
             <option value="rock">Rock</option>
@@ -18,7 +20,7 @@ export default function NavBar({handler}) {
             <option value="rnb">RnB</option>
           </select>
         </label>
-        <label> Decade:
+        <label className="searchLabel"> Decade:
           <select id="genre" name="genrelist" form="searchform">
             <option value="AllYears">All</option>
             <option value="1980">1980</option>
