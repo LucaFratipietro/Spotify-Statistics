@@ -44,9 +44,9 @@ class DB {
     return await instance.collection.find({ Genre: genre });
   }
 
-  async getAllYears() {
-    return instance.collection.find().project({ release_date: 1 });
-  }
+  // async getAllYears() {
+  //   return instance.collection.find().project({ release_date: 1 });
+  // }
 
   /**
    * Method to remove all data from the database
