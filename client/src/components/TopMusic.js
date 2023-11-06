@@ -3,7 +3,7 @@ import '../styling/TopMusic.css';
 
 export default function TopMusic({songs, genre, decade}){
 
-  let filteredSongs = songs;
+  let filteredSongs = [...songs];
 
   //check if genre and decade are set to filterable params
   //if set to AllGenres, dont run the filter
