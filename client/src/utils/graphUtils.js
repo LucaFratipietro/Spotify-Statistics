@@ -53,8 +53,21 @@ const decades = [
   '2020',
 ];
 
+//hardcoded genre colors
+const palette = [
+  '#F94B4B',
+  '#C81BCE',
+  '#3B47EC',
+  '#3BCFEC',
+  '#177540',
+  '#ADB909',
+  '#B96109',
+  '#000000'
+];
+
 export {
   separateSongsToDecades,
   separateGenres,
-  decades
+  decades,
+  palette
 };

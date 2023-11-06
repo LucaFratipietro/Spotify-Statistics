@@ -30,13 +30,14 @@ export default function Graph({ songs, genre }) {
               }, 0);
               const averagePopularity = totalPopularity / songsInDecadeAndGenre.length;
               return averagePopularity;
-            })
+            }),
+            borderColor: utils.palette[2]
           }
         ];
       } else {
         const genres = utils.separateGenres(songs);
   
-        dataset = genres.map(genre => {
+        dataset = genres.map((genre, index) => {
           return {
             label: genre.charAt(0).toUpperCase() + genre.slice(1),
             data: utils.decades.map(decade => {
@@ -47,7 +48,8 @@ export default function Graph({ songs, genre }) {
               }, 0);
               const averagePopularity = totalPopularity / songsInDecadeAndGenre.length;
               return averagePopularity;
-            })
+            }),
+            borderColor: utils.palette[index]
           };
         });
       }
@@ -88,6 +90,12 @@ export default function Graph({ songs, genre }) {
                   suggestedMin: 40,
                   suggestedMax: 100
                 }
+              }
+            },
+            plugins: {
+              legend: {
+                // does nothing on purpose
+                onClick: (e, lineField) => { }
               }
             }
           }}
