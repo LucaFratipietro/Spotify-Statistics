@@ -33,7 +33,10 @@ export default function Main() {
   return (
     <>
       <NavBar handler={handleSearch}/>  
-      <Graph songs={songs}/>
+      <Graph 
+        songs={songs}
+        genre={genre}
+      />
     </>
   );
 

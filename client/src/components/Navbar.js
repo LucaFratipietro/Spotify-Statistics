@@ -24,14 +24,14 @@ export default function NavBar({handler}) {
       <form method="post" onSubmit={handleSubmit}>
         <label className="searchLabel"> Genre:
           <select id="genre" name="genre">
-            <option value="AllSongs">All</option>
+            <option value="AllGenres">All</option>
             <option value="rock">Rock</option>
             <option value="pop">Pop</option>
             <option value="edm">Edm</option>
             <option value="latin">Latin</option>
             <option value="rap">Rap</option>
             <option value="hiphop">Hiphop</option>
-            <option value="rnb">R&B</option>
+            <option value="r&b">R&B</option>
           </select>
         </label>
         <label className="searchLabel"> Decade:
