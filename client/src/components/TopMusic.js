@@ -42,7 +42,7 @@ export default function TopMusic({songs, genre, decade}){
       <h1>
             Top Hits of {genre} from the {decade}
       </h1>
-      <div id="topsongs">
+      <div id="top-songs">
         {listSongs}
       </div>
     </section>
@@ -53,10 +53,10 @@ export default function TopMusic({songs, genre, decade}){
 function MusicSquare({song}){
 
   return(
-    <>
+    <div className="music-square">
       <p>{song.Title} {song.release_date}</p>
       <img src={song.Album_cover_link} alt={song.Title} loading="lazy"/>
-    </>
+    </div>
   );
 
 }
