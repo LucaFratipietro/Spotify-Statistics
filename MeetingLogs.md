@@ -38,3 +38,27 @@ Note taker: Adriano
 * CI jobs not passing
 ## discussion / work
 * Finish Phase 1 (implement 2 GET routes, basic React component, basic full-stack functionality)
+
+#Retrospective Meetings
+
+## What went well
+* Communication was consistent and useful
+* Questions were answered quickly
+* Code review helped us find potential issues in the Code
+* We were able to stay on task, no issues with spliting work between us
+
+## Chalenges
+
+* Some issues with db and testing
+* Switching between modules and CommonsJS
+
+## Potential Chalenges
+
+* Start working on the milestone ealier to avoid time crunch at the end
+* This also lets us not have to worry about pipelines failing last second or other potential disasters
+
+## What should they continue doing?
+
+* Continue seeking help from each other
+* Continue to remain ontract with milestones
+* Use many branches and MRs to keep code clean and do code reviews
