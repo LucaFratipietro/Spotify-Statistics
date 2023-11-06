@@ -1,5 +1,6 @@
 import Graph from './Graph';
 import NavBar from './Navbar';
+import TopMusic from './TopMusic';
 import { useState, useEffect } from 'react';
 
 export default function Main() {
@@ -34,6 +35,7 @@ export default function Main() {
     <>
       <NavBar handler={handleSearch}/>  
       <Graph songs={songs}/>
+      <TopMusic songs={songs} genre={genre} decade={year}/>
     </>
   );
 
