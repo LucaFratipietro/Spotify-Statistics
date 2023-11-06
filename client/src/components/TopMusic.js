@@ -15,7 +15,6 @@ export default function TopMusic({songs, genre, decade}){
 
   }
 
-  //NOTE: DECADE FILTER HERE
   if(decade !== 'AllYears'){
 
     const minYear = parseInt(decade);
@@ -56,7 +55,7 @@ function MusicSquare({song}){
   return(
     <>
       <p>{song.Title} {song.release_date}</p>
-      <img src={song.Album_cover_link} alt={song.Title}/>
+      <img src={song.Album_cover_link} alt={song.Title} loading="lazy"/>
     </>
   );
 
