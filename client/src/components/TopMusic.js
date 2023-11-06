@@ -16,6 +16,17 @@ export default function TopMusic({songs, genre, decade}){
   }
 
   //NOTE: DECADE FILTER HERE
+  if(decade !== 'AllYears'){
+
+    const minYear = parseInt(decade);
+    const maxYear = minYear + 9;
+
+    filteredSongs = songs.filter((song) => {
+      const releaseYear = new Date(song.release_date).getFullYear();
+      return releaseYear >= minYear && releaseYear <= maxYear; 
+    });
+
+  }
 
   //sort array by most popular songs -- and get the top 5
   filteredSongs = filteredSongs.sort((a, b) => a.popularity < b.popularity ? 1 
