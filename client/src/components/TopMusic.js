@@ -29,9 +29,9 @@ export default function TopMusic({songs, genre, decade}){
 
   return(
     <section id="bottom-section">
-      <h2>
+      <h1>
             Top Hits of {genre} from the {decade}
-      </h2>
+      </h1>
       <div id="topsongs">
         {listSongs}
       </div>
