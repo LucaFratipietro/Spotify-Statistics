@@ -9,11 +9,17 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     width: 90%;
 }
 
 .music-square{
+    width: 150px;
     text-align: center;
+}
+
+.music-sqaure p {
+    overflow: auto;
 }
 
 img{

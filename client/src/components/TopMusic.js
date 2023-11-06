@@ -32,8 +32,8 @@ export default function TopMusic({songs, genre, decade}){
     : b.popularity < a.popularity ? -1 : 0);
   const slicedSongs = filteredSongs.slice(0, 5);
 
-  const listSongs = slicedSongs.map((song) =>
-    <MusicSquare song={song} />
+  const listSongs = slicedSongs.map((song, index) =>
+    <MusicSquare song={song} rank = {index + 1}/>
   );
 
 
@@ -50,11 +50,13 @@ export default function TopMusic({songs, genre, decade}){
 
 }
 
-function MusicSquare({song}){
+function MusicSquare({song, rank}){
 
   return(
     <div className="music-square">
-      <p>{song.Title} {song.release_date}</p>
+      <p>Rank: {rank}</p>
+      <p>Title: {song.Title}</p>
+      <p>Release: {song.release_date}</p>
       <img src={song.Album_cover_link} alt={song.Title} loading="lazy"/>
     </div>
   );
