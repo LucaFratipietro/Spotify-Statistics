@@ -20,17 +20,33 @@ export default function TopMusic({songs, genre, decade}){
   //sort array by most popular songs -- and get the top 5
   filteredSongs = filteredSongs.sort((a, b) => a.popularity < b.popularity ? 1 
     : b.popularity < a.popularity ? -1 : 0);
-  const slicedSongs = filteredSongs.slice(0, 4);
+  const slicedSongs = filteredSongs.slice(0, 5);
 
-  console.log(slicedSongs);
-
-  return(
-    <></>
+  const listSongs = slicedSongs.map((song) =>
+    <MusicSquare song={song} />
   );
 
 
+  return(
+    <section id="bottom-section">
+      <h2>
+            Top Hits of {genre} from the {decade}
+      </h2>
+      <div id="topsongs">
+        {listSongs}
+      </div>
+    </section>
+  );
+
 }
 
-function MusicSquare(){
+function MusicSquare({song}){
+
+  return(
+    <>
+      <p>{song.Title} {song.release_date}</p>
+      <img src={song.Album_cover_link} alt={song.Title}/>
+    </>
+  );
 
 }
