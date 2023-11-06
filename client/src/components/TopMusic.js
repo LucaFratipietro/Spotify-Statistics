@@ -3,7 +3,7 @@ import '../styling/TopMusic.css';
 
 export default function TopMusic({songs, genre, decade}){
 
-  let filteredSongs = [...songs];
+  let filteredSongs = songs;
 
   //check if genre and decade are set to filterable params
   //if set to AllGenres, dont run the filter
@@ -20,7 +20,7 @@ export default function TopMusic({songs, genre, decade}){
     const minYear = parseInt(decade);
     const maxYear = minYear + 9;
 
-    filteredSongs = songs.filter((song) => {
+    filteredSongs = filteredSongs.filter((song) => {
       const releaseYear = new Date(song.release_date).getFullYear();
       return releaseYear >= minYear && releaseYear <= maxYear; 
     });
@@ -39,9 +39,7 @@ export default function TopMusic({songs, genre, decade}){
 
   return(
     <section id="bottom-section">
-      <h1>
-            Top Hits of {genre} from the {decade}
-      </h1>
+      <h1>Top Hits of {genre} from the {decade}</h1>
       <div id="top-songs">
         {listSongs}
       </div>
