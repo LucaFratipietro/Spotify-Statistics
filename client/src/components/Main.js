@@ -1,9 +1,20 @@
 import Graph from './Graph';
+import NavBar from './Navbar';
 import { useState, useEffect } from 'react';
 
 export default function Main() {
 
+  //Search params passed to NavBar component
+  //Use to update TopMusic and Graph components
+  const [genre, setGenre] = useState('AllGenres');
+  const [year, setYear] = useState('AllYears');
+
   const [songs, setSongs] = useState([]);
+
+  const handleSearch = (genre, year) => {
+    setGenre(genre);
+    setYear(year);
+  };
 
   async function fetchSongs() {
     const response = await fetch('/songs');
@@ -21,6 +32,7 @@ export default function Main() {
 
   return (
     <>
+      <NavBar handler={handleSearch}/>  
       <Graph songs={songs}/>
     </>
   );
