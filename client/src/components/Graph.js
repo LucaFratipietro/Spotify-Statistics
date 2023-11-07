@@ -14,23 +14,13 @@ export default function Graph({ songs, genre }) {
    * Maps each decade to include the average popularity for each song
    * in that genre.
    */
-
-  // TODO: Fix bug to not change color when showing all genres again
   (function generateDataset() {
     if(songs.length !== 0) {
       if(genre !== 'AllGenres') {
         dataset = [
           {
             label: genre.charAt(0).toUpperCase() + genre.slice(1),
-            data: utils.decades.map(decade => {
-              const songsInDecade = utils.separateSongsToDecades(songs)[decade];
-              const songsInDecadeAndGenre = songsInDecade.filter(song => song.Genre === genre);
-              const totalPopularity = songsInDecadeAndGenre.reduce((sum, song) => {
-                return sum + song.popularity;
-              }, 0);
-              const averagePopularity = totalPopularity / songsInDecadeAndGenre.length;
-              return averagePopularity;
-            }),
+            data: utils.generateAveragePopularity(songs, genre),
             borderColor: utils.palette[2]
           }
         ];
@@ -40,15 +30,7 @@ export default function Graph({ songs, genre }) {
         dataset = genres.map((genre, index) => {
           return {
             label: genre.charAt(0).toUpperCase() + genre.slice(1),
-            data: utils.decades.map(decade => {
-              const songsInDecade = utils.separateSongsToDecades(songs)[decade];
-              const songsInDecadeAndGenre = songsInDecade.filter(song => song.Genre === genre);
-              const totalPopularity = songsInDecadeAndGenre.reduce((sum, song) => {
-                return sum + song.popularity;
-              }, 0);
-              const averagePopularity = totalPopularity / songsInDecadeAndGenre.length;
-              return averagePopularity;
-            }),
+            data: utils.generateAveragePopularity(songs, genre),
             borderColor: utils.palette[index]
           };
         });
@@ -96,6 +78,13 @@ export default function Graph({ songs, genre }) {
               legend: {
                 // does nothing on purpose
                 onClick: (e, lineField) => { }
+              },
+              tooltip: {
+                callbacks: {
+                  label: tooltipItem => {
+                    
+                  }
+                }
               }
             }
           }}
