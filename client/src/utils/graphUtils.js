@@ -29,6 +29,25 @@ function separateSongsToDecades(data) {
 }
 
 /**
+ * Generates an array of average popularity of songs from each decade and genre
+ * 
+ * @param {Array} songs | array of songs
+ * @param {String} genre | genre used to filter songs
+ * @returns {Array} average popularity of songs from each decade and genre
+ */
+function generateAveragePopularity(songs, genre) {
+  return decades.map(decade => {
+    const songsInDecade = separateSongsToDecades(songs)[decade];
+    const songsInDecadeAndGenre = songsInDecade.filter(song => song.Genre === genre);
+    const totalPopularity = songsInDecadeAndGenre.reduce((sum, song) => {
+      return sum + song.popularity;
+    }, 0);
+    const averagePopularity = totalPopularity / songsInDecadeAndGenre.length;
+    return averagePopularity;
+  });
+}
+
+/**
  * Gets unique genres
  * 
  * @returns {Array} | array of unique genres
@@ -68,6 +87,7 @@ const palette = [
 export {
   separateSongsToDecades,
   separateGenres,
+  generateAveragePopularity,
   decades,
   palette
 };
