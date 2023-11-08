@@ -80,10 +80,11 @@ export default function Graph({ songs, genre }) {
                 onClick: (e, lineField) => { }
               },
               tooltip: {
+                usePointStyle: true,
                 callbacks: {
-                  label: tooltipItem => {
-                    
-                  }
+                  label: context => utils.showMostPopular(context, songs, genre),
+                  footer: context => utils.generateFooter(genre),
+                  labelPointStyle: context => utils.setLabelPointerStyle(genre, songs, context)
                 }
               }
             }
