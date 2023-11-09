@@ -22,7 +22,7 @@ export default function NavBar({handler}) {
       Spotify Favourites
       </p>
       <form method="post" onSubmit={handleSubmit}>
-        <label className="searchLabel"> Genre:
+        <label className="search-label"> Genre:
           <select id="genre" name="genre">
             <option value="AllGenres">All</option>
             <option value="rock">Rock</option>
@@ -34,7 +34,7 @@ export default function NavBar({handler}) {
             <option value="r&b">R&B</option>
           </select>
         </label>
-        <label className="searchLabel"> Decade:
+        <label className="search-label"> Decade:
           <select id="genre" name="decade">
             <option value="AllYears">All</option>
             <option value="1970">70s</option>

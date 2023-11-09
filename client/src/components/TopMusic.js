@@ -40,7 +40,7 @@ export default function TopMusic({songs, genre, decade}){
 
   return(
     <section id="bottom-section">
-      <h1>Top {utils.genreToPrint(genre)} hits from the {decade}</h1>
+      <h1>Top {utils.genreToPrint(genre)} Hits {utils.decadeToPrint(decade)}</h1>
       <div id="top-songs">
         {listSongs}
       </div>
