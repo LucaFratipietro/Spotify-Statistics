@@ -21,7 +21,14 @@ export default function Graph({ songs, genre }) {
           {
             label: genre.charAt(0).toUpperCase() + genre.slice(1),
             data: utils.generateAveragePopularity(songs, genre),
-            borderColor: utils.palette[2]
+            borderColor: utils.palette[2],
+            yAxisID: 'y1'
+          },
+          {
+            label: 'Average Tempo Overtime',
+            data: [0.2, 0.3, 0.5, 0.4],
+            borderColor: utils.palette[3],
+            yAxisID: 'y2'
           }
         ];
       } else {
@@ -56,6 +63,7 @@ export default function Graph({ songs, genre }) {
             datasets: dataset
           }}
           options={{
+            responsive: true,
             scales: {
               x: {
                 title: {
@@ -63,7 +71,8 @@ export default function Graph({ songs, genre }) {
                   text: 'Decade'
                 }
               },
-              y: {
+              y1: {
+                type: 'linear',
                 title: {
                   display: true,
                   text: 'Popularity %'
@@ -71,7 +80,20 @@ export default function Graph({ songs, genre }) {
                 ticks: {
                   suggestedMin: 40,
                   suggestedMax: 100
-                }
+                },
+                position: 'left'
+              },
+              y2: {
+                type: 'linear',
+                title: {
+                  display: true,
+                  text: 'Tempo'
+                },
+                ticks: {
+                  suggestedMin: 0.0,
+                  suggestedMax: 1
+                },
+                position: 'right'
               }
             },
             plugins: {
