@@ -31,7 +31,7 @@ export default function NavBar({handler}) {
             <option value="latin">Latin</option>
             <option value="rap">Rap</option>
             <option value="hiphop">Hiphop</option>
-            <option value="rnb">R&B</option>
+            <option value="r&b">R&B</option>
           </select>
         </label>
         <label className="searchLabel"> Decade:
