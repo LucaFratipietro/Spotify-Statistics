@@ -33,10 +33,17 @@ export default function TopMusic({songs, genre, decade}){
     : b.popularity < a.popularity ? -1 : 0);
   const slicedSongs = filteredSongs.slice(0, 20);
 
+  if(slicedSongs.length === 0){
+    return(
+      <section id="bottom-section">
+        <h1>You're a little ahead of the times here</h1>
+      </section>
+    );
+  }
+
   const listSongs = slicedSongs.map((song, index) =>
     <MusicSquare song={song} rank = {index + 1}/>
   );
-
 
   return(
     <section id="bottom-section">
