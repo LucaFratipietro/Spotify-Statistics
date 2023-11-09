@@ -1,6 +1,10 @@
 import '../styling/Navbar.css';
+import { useState } from 'react';
+import { Modal } from 'flowbite-react';
 
 export default function NavBar({handler}) {
+
+  const [openModal, setOpenModal] = useState(false);
 
   //handle submission of form
   const handleSubmit = (e) => {
@@ -18,9 +22,23 @@ export default function NavBar({handler}) {
 
   return (
     <nav>
-      <p>
-      Spotify Favourites
-      </p>
+      <div id="title-buttons">
+        <p>
+        Spotify Favourites
+        </p>
+        <button onClick={() => setOpenModal(true)}>
+          Description
+        </button>
+        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+          <Modal.Header>Description</Modal.Header>
+          <Modal.Body>
+            Description here
+          </Modal.Body>
+        </Modal>
+        <button>
+          Attributions
+        </button>
+      </div>
       <form method="post" onSubmit={handleSubmit}>
         <label className="searchLabel"> Genre:
           <select id="genre" name="genre">

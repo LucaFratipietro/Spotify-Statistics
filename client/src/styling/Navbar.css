@@ -5,7 +5,7 @@ nav{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
 
     position: sticky;
     top: 0px;
@@ -17,4 +17,11 @@ nav{
 
 select {
     margin-left: 5px;
+}
+
+#title-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 20%;
 }
