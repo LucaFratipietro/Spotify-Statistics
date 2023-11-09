@@ -1,9 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 import '../styling/Graph.css';
 import * as utils from '../utils/graphUtils';
 
-export default function Graph({ songs }) {
+export default function Graph({ songs, genre }) {
 
   let dataset = [];
 
@@ -15,22 +16,25 @@ export default function Graph({ songs }) {
    */
   (function generateDataset() {
     if(songs.length !== 0) {
-      const genres = utils.separateGenres(songs);
+      if(genre !== 'AllGenres') {
+        dataset = [
+          {
+            label: genre.charAt(0).toUpperCase() + genre.slice(1),
+            data: utils.generateAveragePopularity(songs, genre),
+            borderColor: utils.palette[2]
+          }
+        ];
+      } else {
+        const genres = utils.separateGenres(songs);
   
-      dataset = genres.map(genre => {
-        return {
-          label: genre.charAt(0).toUpperCase() + genre.slice(1),
-          data: utils.decades.map(decade => {
-            const songsInDecade = utils.separateSongsToDecades(songs)[decade];
-            const songsInDecadeAndGenre = songsInDecade.filter(song => song.Genre === genre);
-            const totalPopularity = songsInDecadeAndGenre.reduce((sum, song) => {
-              return sum + song.popularity;
-            }, 0);
-            const averagePopularity = totalPopularity / songsInDecadeAndGenre.length;
-            return averagePopularity;
-          })
-        };
-      });
+        dataset = genres.map((genre, index) => {
+          return {
+            label: genre.charAt(0).toUpperCase() + genre.slice(1),
+            data: utils.generateAveragePopularity(songs, genre),
+            borderColor: utils.palette[index]
+          };
+        });
+      }
     }
   })();
 
@@ -67,6 +71,20 @@ export default function Graph({ songs }) {
                 ticks: {
                   suggestedMin: 40,
                   suggestedMax: 100
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                // does nothing on purpose
+                onClick: (e, lineField) => { }
+              },
+              tooltip: {
+                usePointStyle: true,
+                callbacks: {
+                  label: context => utils.showMostPopular(context, songs, genre),
+                  footer: context => utils.generateFooter(genre),
+                  labelPointStyle: context => utils.setLabelPointerStyle(genre, songs, context)
                 }
               }
             }

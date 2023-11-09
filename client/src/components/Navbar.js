@@ -40,19 +40,19 @@ export default function NavBar({handler}) {
         </button>
       </div>
       <form method="post" onSubmit={handleSubmit}>
-        <label className="searchLabel"> Genre:
+        <label className="search-label"> Genre:
           <select id="genre" name="genre">
-            <option value="AllSongs">All</option>
+            <option value="AllGenres">All</option>
             <option value="rock">Rock</option>
             <option value="pop">Pop</option>
             <option value="edm">Edm</option>
             <option value="latin">Latin</option>
             <option value="rap">Rap</option>
             <option value="hiphop">Hiphop</option>
-            <option value="rnb">R&B</option>
+            <option value="r&b">R&B</option>
           </select>
         </label>
-        <label className="searchLabel"> Decade:
+        <label className="search-label"> Decade:
           <select id="genre" name="decade">
             <option value="AllYears">All</option>
             <option value="1970">70s</option>
