@@ -26,7 +26,7 @@ export default function Graph({ songs, genre }) {
           },
           {
             label: 'Average Tempo Overtime',
-            data: [0.2, 0.3, 0.5, 0.4],
+            data: utils.generateAverageTempo(songs, genre),
             borderColor: utils.palette[3],
             yAxisID: 'y2'
           }
@@ -88,10 +88,6 @@ export default function Graph({ songs, genre }) {
                 title: {
                   display: true,
                   text: 'Tempo'
-                },
-                ticks: {
-                  suggestedMin: 0.0,
-                  suggestedMax: 1
                 },
                 position: 'right'
               }
