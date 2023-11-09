@@ -27,10 +27,10 @@ export default function TopMusic({songs, genre, decade}){
 
   }
 
-  //sort array by most popular songs -- and get the top 5
+  //sort array by most popular songs -- and get the top 20
   filteredSongs = filteredSongs.sort((a, b) => a.popularity < b.popularity ? 1 
     : b.popularity < a.popularity ? -1 : 0);
-  const slicedSongs = filteredSongs.slice(0, 5);
+  const slicedSongs = filteredSongs.slice(0, 20);
 
   const listSongs = slicedSongs.map((song, index) =>
     <MusicSquare song={song} rank = {index + 1}/>

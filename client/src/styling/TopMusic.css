@@ -16,6 +16,8 @@
 .music-square{
     width: 150px;
     text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .music-sqaure p {
