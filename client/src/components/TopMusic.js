@@ -55,6 +55,7 @@ function MusicSquare({song, rank}){
     <div className="music-square">
       <p>Rank: {rank}</p>
       <p>Title: {song.Title}</p>
+      <p>By: {song.Artist}</p>
       <p>Release: {song.release_date}</p>
       <img src={song.Album_cover_link} alt={song.Title} loading="lazy"/>
     </div>
