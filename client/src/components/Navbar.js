@@ -1,6 +1,6 @@
 import '../styling/Navbar.css';
 import { useState } from 'react';
-import { Modal } from 'flowbite-react';
+import Modal from './Modal.js';
 
 export default function NavBar({handler}) {
 
@@ -29,12 +29,14 @@ export default function NavBar({handler}) {
         <button onClick={() => setOpenModal(true)}>
           Description
         </button>
-        <Modal show={openModal} onClose={() => setOpenModal(false)}>
-          <Modal.Header>Description</Modal.Header>
-          <Modal.Body>
-            Description here
-          </Modal.Body>
-        </Modal>
+        {openModal &&
+          <Modal content={
+            <h1>Description</h1>
+          } closeModal={() => {
+            setOpenModal(false);
+            document.body.classList.remove('modal-open');
+          }}/>
+        }
         <button>
           Attributions
         </button>
