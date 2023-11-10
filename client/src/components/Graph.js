@@ -3,10 +3,17 @@ import { Chart as ChartJS } from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 import '../styling/Graph.css';
 import * as utils from '../utils/graphUtils';
+import {useEffect, useState} from 'react';
 
 export default function Graph({ songs, genre }) {
 
-  let dataset = [];
+  const [singleGenre, setSingle] = useState(false);
+  const [dataset, setDataset] = useState([]);
+
+  //change datasetvalue based on the genre prop
+  useEffect(() => {
+    generateDataset();
+  }, [genre]);
 
   /**
    * Generates dataset for each data in the chart for songs.
@@ -14,10 +21,10 @@ export default function Graph({ songs, genre }) {
    * Maps each decade to include the average popularity for each song
    * in that genre.
    */
-  (function generateDataset() {
+  function generateDataset() {
     if(songs.length !== 0) {
       if(genre !== 'AllGenres') {
-        dataset = [
+        setDataset([
           {
             label: genre.charAt(0).toUpperCase() + genre.slice(1),
             data: utils.generateAveragePopularity(songs, genre),
@@ -27,23 +34,28 @@ export default function Graph({ songs, genre }) {
           {
             label: 'Average Tempo Overtime',
             data: utils.generateAverageTempo(songs, genre),
-            borderColor: utils.palette[3],
+            borderColor: utils.palette[7],
             yAxisID: 'y2'
           }
-        ];
+        ]);
+        setSingle(true);
       } else {
         const genres = utils.separateGenres(songs);
   
-        dataset = genres.map((genre, index) => {
+        let allGenresData = genres.map((genre, index) => {
           return {
             label: genre.charAt(0).toUpperCase() + genre.slice(1),
             data: utils.generateAveragePopularity(songs, genre),
             borderColor: utils.palette[index]
           };
         });
+        setDataset(allGenresData);
+        setSingle(false);
       }
     }
-  })();
+  };
+
+  console.log(dataset);
 
   /**
    * Function to either display graph or loading message
@@ -54,62 +66,69 @@ export default function Graph({ songs, genre }) {
     if(songs.length === 0) {
       return <h1>Loading...</h1>;
     }
-    return (
-      <>
-        <h1>Spotify Statistics</h1>
-        <Line 
-          data={{
-            labels: utils.decades.map(decade => decade + 's'),
-            datasets: dataset
-          }}
-          options={{
-            responsive: true,
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: 'Decade'
+    if(singleGenre){
+      return (
+        <>
+          <h1>Spotify Statistics</h1>
+          <Line 
+            data={{
+              labels: utils.decades.map(decade => decade + 's'),
+              datasets: dataset
+            }}
+            options={{
+              responsive: true,
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Decade'
+                  }
+                },
+                y1: {
+                  type: 'linear',
+                  title: {
+                    display: true,
+                    text: 'Popularity %'
+                  },
+                  ticks: {
+                    suggestedMin: 40,
+                    suggestedMax: 100
+                  },
+                  position: 'left'
+                },
+                y2: {
+                  type: 'linear',
+                  title: {
+                    display: true,
+                    text: 'Tempo'
+                  },
+                  position: 'right'
                 }
               },
-              y1: {
-                type: 'linear',
-                title: {
-                  display: true,
-                  text: 'Popularity %'
+              plugins: {
+                legend: {
+                  // does nothing on purpose
+                  onClick: (e, lineField) => { }
                 },
-                ticks: {
-                  suggestedMin: 40,
-                  suggestedMax: 100
-                },
-                position: 'left'
-              },
-              y2: {
-                type: 'linear',
-                title: {
-                  display: true,
-                  text: 'Tempo'
-                },
-                position: 'right'
-              }
-            },
-            plugins: {
-              legend: {
-                // does nothing on purpose
-                onClick: (e, lineField) => { }
-              },
-              tooltip: {
-                usePointStyle: true,
-                callbacks: {
-                  label: context => utils.showMostPopular(context, songs, genre),
-                  footer: context => utils.generateFooter(genre),
-                  labelPointStyle: context => utils.setLabelPointerStyle(genre, songs, context)
+                tooltip: {
+                  usePointStyle: true,
+                  callbacks: {
+                    label: context => utils.showMostPopular(context, songs, genre),
+                    footer: context => utils.generateFooter(genre),
+                    labelPointStyle: context => utils.setLabelPointerStyle(genre, songs, context)
+                  }
                 }
               }
-            }
-          }}
-        />
-      </>
-    );
+            }}
+          />
+        </>
+      );
+    }else{
+      return(
+        <></>
+      );
+    }
+    
   }
 
   return (
