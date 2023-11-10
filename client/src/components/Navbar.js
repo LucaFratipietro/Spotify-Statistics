@@ -87,6 +87,11 @@ export default function NavBar({handler}) {
                     Chart.js
                   </a>
                 </li>
+                <li>
+                  <a href="https://www.chartjs.org">
+                    Chart.js
+                  </a>
+                </li>
               </ul>
             </div>
           } closeModal={() => {
