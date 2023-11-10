@@ -87,15 +87,10 @@ export default function NavBar({handler}) {
                     Chart.js
                   </a>
                 </li>
-                <li>
-                  <a href="https://www.chartjs.org">
-                    Chart.js
-                  </a>
-                </li>
               </ul>
             </div>
           } closeModal={() => {
-            setOpenModal(false);
+            setOpenAtr(false);
             document.body.classList.remove('modal-open');
           }}/>
         }
