@@ -1,6 +1,10 @@
 import '../styling/Navbar.css';
+import { useState } from 'react';
+import Modal from './Modal.js';
 
 export default function NavBar({handler}) {
+
+  const [openModal, setOpenModal] = useState(false);
 
   //handle submission of form
   const handleSubmit = (e) => {
@@ -18,9 +22,44 @@ export default function NavBar({handler}) {
 
   return (
     <nav>
-      <p>
-      Spotify Favourites
-      </p>
+      <div id="title-buttons">
+        <p>
+        Spotify Favourites
+        </p>
+        <button onClick={() => setOpenModal(true)}>
+          Description
+        </button>
+        {openModal &&
+          <Modal content={
+            <div id="modal-content">
+              <h1>Description</h1>
+              <p>
+                This application shows Spotify statistics from the last 50 years. 
+              </p>
+              <h3>Graph</h3>
+              <p>
+                 The graph shows each genre throughout the decades and scaled by
+                 popularity on average (in %). Using the dropdown for 'Genre' you
+                 can see one specific genre in the graph as well as the most popular
+                 song from that genre and decade.
+              </p>
+              <h3>Top Music</h3>
+              <p>
+                 The bottom portion of the application shows the most popular songs
+                 throughout different decades and genres. Updating the dropdown for both
+                 options on the top right of the application filters the data to be more
+                 specific to what you want to know!
+              </p>
+            </div>
+          } closeModal={() => {
+            setOpenModal(false);
+            document.body.classList.remove('modal-open');
+          }}/>
+        }
+        <button>
+          Attributions
+        </button>
+      </div>
       <form method="post" onSubmit={handleSubmit}>
         <label className="search-label"> Genre:
           <select id="genre" name="genre">
