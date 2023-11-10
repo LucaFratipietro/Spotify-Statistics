@@ -48,6 +48,25 @@ function generateAveragePopularity(songs, genre) {
 }
 
 /**
+ * Generates an array of average tempo of songs for a decade and genre
+ * @param {Array} songs | array of songs
+ * @param {String} genre | genre used to filter songs
+ * @returns {Array} average tempo of songs from each decade and genre
+ * 
+ */
+function generateAverageTempo(songs, genre) {
+  return decades.map(decade => {
+    const songsInDecade = separateSongsToDecades(songs)[decade];
+    const songsInDecadeAndGenre = songsInDecade.filter(song => song.Genre === genre);
+    const totalTempo = songsInDecadeAndGenre.reduce((sum, song) => {
+      return sum + song.tempo;
+    }, 0);
+    const averageTempo = totalTempo / songsInDecadeAndGenre.length;
+    return averageTempo;
+  });
+}
+
+/**
  * Returns most popular song from a genre for each decade
  * 
  * @param {Array} songs | songs in which to check popularity
@@ -162,6 +181,7 @@ export {
   separateSongsToDecades,
   separateGenres,
   generateAveragePopularity,
+  generateAverageTempo,
   popularSongsByGenre,
   showMostPopular,
   generateFooter,
