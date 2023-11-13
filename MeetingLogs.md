@@ -1,6 +1,7 @@
 ## Meetings
 # 2023-10-23 Monday 1:50pm, 2hrs, in person
 Attendees: Adriano, Luca
+
 Note taker: Luca
 ## Problems
 * No problems for now, ran smoothly
@@ -10,6 +11,7 @@ Note taker: Luca
 
 # 2023-10-27 Friday 3:30pm, 20 minutes, in person
 Attendees: Adriano, Luca
+
 Note taker: Luca
 ## Problems
 * Need to seperate the tasks for the first submission
@@ -21,6 +23,7 @@ Note taker: Luca
 
 # 2023-10-29 Sunday 1:00pm, 30 minutes, online
 Attendees: Adriano, Luca
+
 Note taker: Luca
 ## Problems
 * Just ironing out some of the smaller details of the project setup
@@ -31,6 +34,7 @@ Note taker: Luca
 
 # 2023-11-01 Wednesday 3:00, 8 hours ;( , online
 Attendees: Adriano, Luca
+
 Note taker: Adriano
 ## Problems
 * Mocking DB in ESM not passing (always trying to connect to DB)
@@ -39,7 +43,7 @@ Note taker: Adriano
 ## discussion / work
 * Finish Phase 1 (implement 2 GET routes, basic React component, basic full-stack functionality)
 
-#Retrospective Meetings
+# Retrospective Meetings
 
 ## What went well
 * Communication was consistent and useful
@@ -47,7 +51,7 @@ Note taker: Adriano
 * Code review helped us find potential issues in the Code
 * We were able to stay on task, no issues with spliting work between us
 
-## Chalenges
+## Challenges
 
 * Some issues with db and testing
 * Switching between modules and CommonsJS
@@ -62,3 +66,23 @@ Note taker: Adriano
 * Continue seeking help from each other
 * Continue to remain ontract with milestones
 * Use many branches and MRs to keep code clean and do code reviews
+
+# 2023-11-09 Thursday 10:00, 3 hours
+Attendees: Adriano, Luca
+
+Note taker: Adriano
+## Problems
+* Finding easy/useful modal libraries in React
+* Issues with Spotify useEffect
+## discussion / work
+* Implement description/attribution buttons in navbar
+* Add tempo data to display in the graph
+
+# 2023-11-13 Monday 1:00, 3 hours
+Attendees: Adriano, Luca
+
+Note taker: Luca
+## Problems
+* Spotify data not being rendered on initial load
+## discussion / work
+* Modify sizing of graph in the application
