@@ -23,7 +23,7 @@ export function genreToPrint(genre){
 }
 
 export function decadeToPrint(decade){
-  if(decade == 'AllYears'){
+  if(decade === 'AllYears'){
     return 'of All Time';
   } else{
     return `From the ${decade}s`; 
