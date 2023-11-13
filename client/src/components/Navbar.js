@@ -5,6 +5,7 @@ import Modal from './Modal.js';
 export default function NavBar({handler}) {
 
   const [openModal, setOpenModal] = useState(false);
+  const [openAtr, setOpenAtr] = useState(false);
 
   //handle submission of form
   const handleSubmit = (e) => {
@@ -26,7 +27,7 @@ export default function NavBar({handler}) {
         <p>
         Spotify Favourites
         </p>
-        <button onClick={() => setOpenModal(true)}>
+        <button className="modal-buttons" onClick={() => setOpenModal(true)}>
           Description
         </button>
         {openModal &&
@@ -56,9 +57,43 @@ export default function NavBar({handler}) {
             document.body.classList.remove('modal-open');
           }}/>
         }
-        <button>
+        <button className="modal-buttons" onClick={() => setOpenAtr(true)}>
           Attributions
         </button>
+        {openAtr &&
+          <Modal content={
+            <div id="modal-content">
+              <h1>Project By:</h1>
+              <p>
+                Adriano D'Alonzo -- Luca Fratipietro
+              </p>
+              <h3>Attributions</h3>
+              <ul>
+                <li>
+                  <a href="https://www.kaggle.com/datasets/naoh1092/spotify-genre-audio-features/">
+                    Dataset Provided by Noah
+                  </a>
+                </li>
+                <li>
+                  <a href="https://everynoise.com/everynoise1d.cgi">
+                    Spotify Playlist Data Provided by Every Noise at Once API
+                  </a>
+                </li>
+              </ul>
+              <h3>Dependencies</h3>
+              <ul>
+                <li>
+                  <a href="https://www.chartjs.org">
+                    Chart.js
+                  </a>
+                </li>
+              </ul>
+            </div>
+          } closeModal={() => {
+            setOpenAtr(false);
+            document.body.classList.remove('modal-open');
+          }}/>
+        }
       </div>
       <form method="post" onSubmit={handleSubmit}>
         <label className="search-label"> Genre:
