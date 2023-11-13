@@ -108,6 +108,24 @@ function showMostPopular(context, songs, genre) {
 }
 
 /**
+ * Returns a string containing most popular song's title and genre
+ * 
+ * @param {TooltipItem} context | context of the tooltip
+ * @param {Array} songs | songs to get the tempo from
+ * @param {String} genre | genre to display tempo for
+ * @returns {String} most popular song title and artist
+ */
+function showTempo(context, songs, genre) {
+  if(genre !== 'AllGenres') {
+    const averageTempo = generateAverageTempo(songs, genre);
+    if(averageTempo[context.dataIndex]) {
+      const tempoInfo = Math.round(averageTempo[context.dataIndex]);
+      return `Average Tempo: ${tempoInfo}`;
+    }
+  }
+}
+
+/**
  * Generates footer to display in tooltip modal
  * 
  * @param {String} genre | genre to check
@@ -115,7 +133,7 @@ function showMostPopular(context, songs, genre) {
  */
 function generateFooter(genre) {
   if(genre !== 'AllGenres') {
-    return 'Most Popular Song';
+    return 'Most Popular Song -- Average Tempo';
   }
   return '% Popularity across the decade!';
 }
@@ -186,6 +204,7 @@ export {
   showMostPopular,
   generateFooter,
   setLabelPointerStyle,
+  showTempo,
   decades,
   palette
 };

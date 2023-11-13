@@ -54,10 +54,6 @@ export default function Graph({ songs, genre }) {
     generateDataset();
   }, [songs, genre]);
 
-  
-
-  console.log(dataset);
-
   /**
    * Function to either display graph or loading message
    * 
@@ -114,7 +110,8 @@ export default function Graph({ songs, genre }) {
                 tooltip: {
                   usePointStyle: true,
                   callbacks: {
-                    label: context => utils.showMostPopular(context, songs, genre),
+                    // eslint-disable-next-line max-len
+                    label: context => `${utils.showMostPopular(context, songs, genre)} -- ${utils.showTempo(context, songs, genre)}`,
                     footer: context => utils.generateFooter(genre),
                     labelPointStyle: context => utils.setLabelPointerStyle(genre, songs, context)
                   }
