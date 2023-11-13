@@ -12,48 +12,49 @@ export default function Graph({ songs, genre }) {
 
   //change datasetvalue based on the genre prop
   useEffect(() => {
-    generateDataset();
-  }, [genre]);
-
-  /**
+    /**
    * Generates dataset for each data in the chart for songs.
    * Uses unique genres to create a label
    * Maps each decade to include the average popularity for each song
    * in that genre.
    */
-  function generateDataset() {
-    if(songs.length !== 0) {
-      if(genre !== 'AllGenres') {
-        setDataset([
-          {
-            label: genre.charAt(0).toUpperCase() + genre.slice(1),
-            data: utils.generateAveragePopularity(songs, genre),
-            borderColor: utils.palette[2],
-            yAxisID: 'y1'
-          },
-          {
-            label: 'Average Tempo Overtime',
-            data: utils.generateAverageTempo(songs, genre),
-            borderColor: utils.palette[7],
-            yAxisID: 'y2'
-          }
-        ]);
-        setSingle(true);
-      } else {
-        const genres = utils.separateGenres(songs);
-  
-        const allGenresData = genres.map((genre, index) => {
-          return {
-            label: genre.charAt(0).toUpperCase() + genre.slice(1),
-            data: utils.generateAveragePopularity(songs, genre),
-            borderColor: utils.palette[index]
-          };
-        });
-        setDataset(allGenresData);
-        setSingle(false);
+    function generateDataset() {
+      if(songs.length !== 0) {
+        if(genre !== 'AllGenres') {
+          setDataset([
+            {
+              label: genre.charAt(0).toUpperCase() + genre.slice(1),
+              data: utils.generateAveragePopularity(songs, genre),
+              borderColor: utils.palette[2],
+              yAxisID: 'y1'
+            },
+            {
+              label: 'Average Tempo Overtime',
+              data: utils.generateAverageTempo(songs, genre),
+              borderColor: utils.palette[7],
+              yAxisID: 'y2'
+            }
+          ]);
+          setSingle(true);
+        } else {
+          const genres = utils.separateGenres(songs);
+    
+          const allGenresData = genres.map((genre, index) => {
+            return {
+              label: genre.charAt(0).toUpperCase() + genre.slice(1),
+              data: utils.generateAveragePopularity(songs, genre),
+              borderColor: utils.palette[index]
+            };
+          });
+          setDataset(allGenresData);
+          setSingle(false);
+        }
       }
-    }
-  };
+    };
+    generateDataset();
+  }, [songs, genre]);
+
+  
 
   console.log(dataset);
 
