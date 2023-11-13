@@ -9,6 +9,8 @@ Note taker: Luca
 * Discuss team policies and setup Git repo.
 * Able to find a good source of data for out project
 
+***
+
 # 2023-10-27 Friday 3:30pm, 20 minutes, in person
 Attendees: Adriano, Luca
 
@@ -21,6 +23,8 @@ Note taker: Luca
 * Luca works on the ProjectProposal.md, wireframe and creating a basic React app
 * Both of us work on an API endpoint and to test the one we create
 
+***
+
 # 2023-10-29 Sunday 1:00pm, 30 minutes, online
 Attendees: Adriano, Luca
 
@@ -32,6 +36,8 @@ Note taker: Luca
 * We found a good dependency to use for our chart visualization, Chart.js
 * For now, we will use Adri's account for the data
 
+***
+
 # 2023-11-01 Wednesday 3:00, 8 hours ;( , online
 Attendees: Adriano, Luca
 
@@ -42,6 +48,8 @@ Note taker: Adriano
 * CI jobs not passing
 ## discussion / work
 * Finish Phase 1 (implement 2 GET routes, basic React component, basic full-stack functionality)
+
+***
 
 # Retrospective Meetings
 
@@ -67,6 +75,8 @@ Note taker: Adriano
 * Continue to remain ontract with milestones
 * Use many branches and MRs to keep code clean and do code reviews
 
+***
+
 # 2023-11-09 Thursday 10:00, 3 hours
 Attendees: Adriano, Luca
 
@@ -78,6 +88,8 @@ Note taker: Adriano
 * Implement description/attribution buttons in navbar
 * Add tempo data to display in the graph
 
+***
+
 # 2023-11-13 Monday 1:00, 3 hours
 Attendees: Adriano, Luca
 
@@ -86,3 +98,6 @@ Note taker: Luca
 * Spotify data not being rendered on initial load
 ## discussion / work
 * Modify sizing of graph in the application
+
+***
+
