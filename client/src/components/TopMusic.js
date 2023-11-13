@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import '../styling/TopMusic.css';
 import * as utils from '../utils/displayUtils';
 
