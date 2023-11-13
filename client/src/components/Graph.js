@@ -42,7 +42,7 @@ export default function Graph({ songs, genre }) {
       } else {
         const genres = utils.separateGenres(songs);
   
-        let allGenresData = genres.map((genre, index) => {
+        const allGenresData = genres.map((genre, index) => {
           return {
             label: genre.charAt(0).toUpperCase() + genre.slice(1),
             data: utils.generateAveragePopularity(songs, genre),
@@ -125,7 +125,50 @@ export default function Graph({ songs, genre }) {
       );
     }else{
       return(
-        <></>
+        <>
+          <h1>Spotify Statistics</h1>
+          <Line 
+            data={{
+              labels: utils.decades.map(decade => decade + 's'),
+              datasets: dataset
+            }}
+            options={{
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Decade'
+                  }
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Popularity %'
+                  },
+                  ticks: {
+                    suggestedMin: 40,
+                    suggestedMax: 100
+                  }
+                }
+              },
+              plugins: {
+                legend: {
+                // does nothing on purpose
+                  onClick: (e, lineField) => { }
+                },
+                tooltip: {
+                  usePointStyle: true,
+                  callbacks: {
+                    label: context => utils.showMostPopular(context, songs, genre),
+                    footer: context => utils.generateFooter(genre),
+                    labelPointStyle: context => utils.setLabelPointerStyle(genre, songs, context)
+                  }
+                }
+              }
+            }}
+          />
+        </>
+
       );
     }
     
