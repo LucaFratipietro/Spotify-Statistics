@@ -68,26 +68,26 @@ export default function NavBar({handler}) {
                 Adriano D'Alonzo -- Luca Fratipietro
               </p>
               <h3>Attributions</h3>
-              <ul>
-                <li>
+              <div class="attributions">
+                <p>
                   <a href="https://www.kaggle.com/datasets/naoh1092/spotify-genre-audio-features/">
                     Dataset Provided by Noah
                   </a>
-                </li>
-                <li>
+                </p>
+                <p>
                   <a href="https://everynoise.com/everynoise1d.cgi">
                     Spotify Playlist Data Provided by Every Noise at Once API
                   </a>
-                </li>
-              </ul>
+                </p>
+              </div>
               <h3>Dependencies</h3>
-              <ul>
-                <li>
+              <div>
+                <p>
                   <a href="https://www.chartjs.org">
                     Chart.js
                   </a>
-                </li>
-              </ul>
+                </p>
+              </div>
             </div>
           } closeModal={() => {
             setOpenAtr(false);

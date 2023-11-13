@@ -50,46 +50,49 @@ export default function Graph({ songs, genre }) {
     return (
       <>
         <h1>Spotify Statistics</h1>
-        <Line 
-          data={{
-            labels: utils.decades.map(decade => decade + 's'),
-            datasets: dataset
-          }}
-          options={{
-            scales: {
-              x: {
-                title: {
-                  display: true,
-                  text: 'Decade'
-                }
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: 'Popularity %'
+        <div className="graph">
+          <Line 
+            data={{
+              labels: utils.decades.map(decade => decade + 's'),
+              datasets: dataset
+            }}
+            options={{
+              maintainAspectRatio: false,
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Decade'
+                  }
                 },
-                ticks: {
-                  suggestedMin: 40,
-                  suggestedMax: 100
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Popularity %'
+                  },
+                  ticks: {
+                    suggestedMin: 40,
+                    suggestedMax: 100
+                  }
                 }
-              }
-            },
-            plugins: {
-              legend: {
-                // does nothing on purpose
-                onClick: (e, lineField) => { }
               },
-              tooltip: {
-                usePointStyle: true,
-                callbacks: {
-                  label: context => utils.showMostPopular(context, songs, genre),
-                  footer: context => utils.generateFooter(genre),
-                  labelPointStyle: context => utils.setLabelPointerStyle(genre, songs, context)
+              plugins: {
+                legend: {
+                  // does nothing on purpose
+                  onClick: (e, lineField) => { }
+                },
+                tooltip: {
+                  usePointStyle: true,
+                  callbacks: {
+                    label: context => utils.showMostPopular(context, songs, genre),
+                    footer: context => utils.generateFooter(genre),
+                    labelPointStyle: context => utils.setLabelPointerStyle(genre, songs, context)
+                  }
                 }
               }
-            }
-          }}
-        />
+            }}
+          />
+        </div>
       </>
     );
   }
