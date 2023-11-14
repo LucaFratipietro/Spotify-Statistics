@@ -1,7 +1,34 @@
 const express = require('express');
 const songs = require('./routes/songs.js');
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Spotify Statistics Swagger Documentation',
+    version: '1.0.0',
+    description: 
+      'REST API Documentation for the Spotify Statistics application using the MERN stack'
+  },
+  servers: [
+    {
+      url: 'http://localhost:3000',
+      description: 'Spotify Statistics Server'
+    }
+  ]
+};
+
+const options = {
+  swaggerDefinition,
+  apis: ['./server/routes/*.js']
+};
+
+const swaggerSpec = swaggerJSDoc(options);
 
 const app = express();
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get('/', (req, res, next) => {
   next();
