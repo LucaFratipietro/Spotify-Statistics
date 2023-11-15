@@ -101,3 +101,10 @@ Note taker: Luca
 
 ***
 
+# 2023-11-15 3:00, 20 minutes
+Attendess: Adriano, Luca
+
+Note Taker: Luca
+##discussion / work
+* Simple discussion of anything left we have to do before milestone 2 submission tonight
+* couple of small bug fixes, but mostly complete
