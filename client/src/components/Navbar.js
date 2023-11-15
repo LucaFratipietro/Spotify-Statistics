@@ -2,6 +2,17 @@ import '../styling/Navbar.css';
 import { useState } from 'react';
 import Modal from './Modal.js';
 
+/**
+ * returns the navbar of the website
+ * contains the two modal buttons for attirbutions and description
+ * and two buttons to select the genre and decade info
+ * to be displayed
+ * params
+ * @param   {callBack} handler callback to update the selected
+ * genre and decade in main
+ * @return  {JSX}  
+ */
+
 export default function NavBar({handler}) {
 
   const [openModal, setOpenModal] = useState(false);
