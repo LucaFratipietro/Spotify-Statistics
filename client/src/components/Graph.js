@@ -122,6 +122,7 @@ export default function Graph({ songs, genre }) {
         </>
       );
     }else{
+      
       return(
         <>
           <h1>Spotify Statistics</h1>
