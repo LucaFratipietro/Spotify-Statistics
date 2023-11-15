@@ -1,6 +1,14 @@
 import '../styling/TopMusic.css';
 import * as utils from '../utils/displayUtils';
 
+/**
+ * returns an array of MusicSqare components based on the given
+ * params
+ * @param   {Array[song]} songs Array of all songs fetch by main
+ * @param   {string} genre genre to get results from
+ * @param   {string} decade decade for fetching results
+ * @return  {JSX}  
+ */
 export default function TopMusic({songs, genre, decade}){
 
   let filteredSongs = songs;
@@ -54,6 +62,14 @@ export default function TopMusic({songs, genre, decade}){
   );
 
 }
+
+/**
+ * returns a MusciSquare JSX with a songs rank, title, artist, release and img
+ * params
+ * @param   {song} song Song object
+ * @param   {int} rank Its rank in the listOfSongs
+ * @return  {JSX} 
+ */
 
 function MusicSquare({song, rank}){
 

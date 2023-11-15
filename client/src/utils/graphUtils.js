@@ -108,7 +108,7 @@ function showMostPopular(context, songs, genre) {
 }
 
 /**
- * Returns a string containing most popular song's title and genre
+ * Returns a string containing the average tempo of a genre and decade
  * 
  * @param {TooltipItem} context | context of the tooltip
  * @param {Array} songs | songs to get the tempo from
