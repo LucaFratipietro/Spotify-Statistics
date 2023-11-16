@@ -9,7 +9,7 @@ qualities of the most popular songs of the last 60 years. Using this data, out a
 
 ## API
 
-### Endpoint /all-songs/year?genre
+### Endpoint /songs/year?genre
 
 The first endpoint we will define will fetch all the songs in our data from a specific year. If the client does not request a specific genre to be given, all songs from that year will be in the response. If a specific genre query is passed, say Rock, all Rock songs for that year will be the response.
 
@@ -17,7 +17,7 @@ The first endpoint we will define will fetch all the songs in our data from a sp
 
 This endpoint will return the 10 most popular songs of a given year defined by the Data's "Popularity" value. Optionally, allow query parameter to return different amounts of songs
 
-### Endpoint /all-songs
+### Endpoint /songs
 
 Simply returns all-songs in the dataset
 
