@@ -144,8 +144,7 @@ export default function Graph({ songs, genre }) {
                       text: 'Decade'
                     }
                   },
-                  y1: {
-                    type: 'linear',
+                  y: {
                     title: {
                       display: true,
                       text: 'Popularity %'
@@ -153,10 +152,8 @@ export default function Graph({ songs, genre }) {
                     ticks: {
                       suggestedMin: 40,
                       suggestedMax: 100
-                    },
-                    position: 'left'
-                  },
-                  y2: null,
+                    }
+                  }
                 },
                 plugins: {
                   legend: {
