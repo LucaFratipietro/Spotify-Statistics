@@ -64,7 +64,7 @@ Note taker: Adriano
 * Some issues with db and testing
 * Switching between modules and CommonsJS
 
-## Potential Chalenges
+## Potential Challenges
 
 * Start working on the milestone ealier to avoid time crunch at the end
 * This also lets us not have to worry about pipelines failing last second or other potential disasters
@@ -74,6 +74,15 @@ Note taker: Adriano
 * Continue seeking help from each other
 * Continue to remain ontract with milestones
 * Use many branches and MRs to keep code clean and do code reviews
+
+## What actions would you like to praise thanks for?
+* Staying on track
+* Asking for help
+* Being understanding when it comes to arrangements/disagreements
+* Keeping it professional
+* Being a great person/teammate
+
+### ! No changes made to **team policies** or **project plan** !
 
 ***
 
