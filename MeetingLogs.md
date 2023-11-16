@@ -105,6 +105,6 @@ Note taker: Luca
 Attendess: Adriano, Luca
 
 Note Taker: Luca
-##discussion / work
+## discussion / work
 * Simple discussion of anything left we have to do before milestone 2 submission tonight
 * couple of small bug fixes, but mostly complete
