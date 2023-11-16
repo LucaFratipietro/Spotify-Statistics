@@ -28,7 +28,23 @@ class DB {
     await instance.client.connect();
     instance.db = await instance.client.db(dbName);
     await instance.client.db(dbName).command({ping: 1});
+    console.log('Successfully connected to MongoDB Database ' + dbName);
     instance.collection = await instance.db.collection(collName);
+  }
+
+  /**
+   * Method to close connect to database
+   */
+  async close() {
+    await instance.client.close();
+    instance = null;
+  }
+
+  /**
+   * Method to insert data into database
+   */
+  async insertData(data) {
+    return await instance.collection.insertMany(data);
   }
 
   /**
@@ -43,10 +59,6 @@ class DB {
     }
     return await instance.collection.find({ Genre: genre });
   }
-
-  // async getAllYears() {
-  //   return instance.collection.find().project({ release_date: 1 });
-  // }
 
   /**
    * Method to remove all data from the database
