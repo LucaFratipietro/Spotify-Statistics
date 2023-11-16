@@ -49,7 +49,7 @@ export default function TopMusic({songs, genre, decade}){
   }
 
   const listSongs = slicedSongs.map((song, index) =>
-    <MusicSquare song={song} rank = {index + 1}/>
+    <MusicSquare song={song} rank = {index + 1} index = {index}/>
   );
 
   return(
@@ -71,10 +71,10 @@ export default function TopMusic({songs, genre, decade}){
  * @return  {JSX} 
  */
 
-function MusicSquare({song, rank}){
+function MusicSquare({song, rank, index}){
 
   return(
-    <div className="music-square">
+    <div key={song.title} className="music-square">
       <p>Rank: {rank}</p>
       <p>Title: {song.Title}</p>
       <p>By: {song.Artist}</p>
