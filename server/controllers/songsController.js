@@ -1,4 +1,5 @@
-const {DB} = require('../db/db.js');
+const { DB } = require('../db/db.js');
+// const { extractYear } = require('../utils/utils');
 const db = new DB();
 
 /**
@@ -45,7 +46,9 @@ async function allSongs(req, res) {
  */
 
 async function allSongsByGenre(req, res){
-
+  // if(req.params.genre.toLowerCase().trim() === 'years') {
+  //   allYears(req, res);
+  // } else {
   try{
     let songsByGenre = await db.getAllSongs(req.params.genre);
     
@@ -73,7 +76,27 @@ async function allSongsByGenre(req, res){
     console.error(e.message);
     res.sendStatus(500).json({error: e.message});
   }
+  // }
 }
+
+/**
+ * Makes a call to the DB object for all years from the DB
+ * @returns {JSON} - returns all years from the DB for each song
+ */
+// async function allYears(req, res) {
+//   try {
+//     let dates = await db.getAllYears();
+//     dates = await dates.toArray();
+//     const years = dates.map(date => {
+//       return extractYear(date);
+//     });
+//     const uniqueYears = Array.from(new Set(years));
+//     res.status(200).json({years: uniqueYears.sort()});
+//   } catch (e) {
+//     console.error(e.message);
+//     res.sendStatus(404).json({error: e.message});
+//   }
+// }
 
 /*async function topSongsByYear(req, res){
   //STUB: NOT IMPLEMENTED

@@ -1,0 +1,29 @@
+#bottom-section{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#top-songs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.music-square{
+    width: 150px;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.music-sqaure p {
+    overflow: auto;
+}
+
+img{
+    width: 150px;
+}
+
