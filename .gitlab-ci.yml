@@ -3,6 +3,7 @@ image: node:18-bullseye-slim
 stages:
   - lint
   - build
+  - release
   - test
 
 workflow:
@@ -54,3 +55,20 @@ client-side-build:
     when: on_success
     paths:
       - client/build
+
+build-app-archive:
+  stage: release
+  variables: 
+    RELEASE_FILE: release-$CI_PROJECT_NAME-$CI_COMMIT_TAG-$CI_COMMIT_SHORT_SHA.tar.gz
+  dependencies:
+    - client-side-build
+  rules:
+    - if: $CI_COMMIT_TAG
+  before_script: 
+    - 'cd server && npm ci --omit dev && cd ../client && npm ci --omit dev'
+  script:
+    - "tar --exclude='./server/.npm' -zcvf $RELEASE_FILE client server"
+  artifacts:
+    expire_in: "30 days"
+    paths:
+      - "$RELEASE_FILE.tar.gz"
