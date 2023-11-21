@@ -23,16 +23,17 @@ async function allSongs(req, res) {
     
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
-      allSongs = cache.get(`allSongs-${req.query.year}`);
-      if(!allSongs) {
-        allSongs = allSongs.filter((song) => {
+      let allSongsByYear = cache.get(`allSongs-${req.query.year}`);
+      if(!allSongsByYear) {
+        allSongsByYear = allSongs.filter((song) => {
           return song.release_date.includes(req.query.year);
         });
-        cache.put(`allSongs-${req.query.year}`);
+        allSongs = allSongsByYear;
+        cache.put(`allSongs-${req.query.year}`, allSongs);
       }
     }
 
-    if(allSongs.length === 0){
+    if(allSongs.length === 0) {
       res.type('json');
       const message = 'Did not return any results. Try another year in the query parameter';
       res.status(404).json({error: message});
@@ -77,7 +78,7 @@ async function allSongsByGenre(req, res){
         songsByGenre = songsByGenre.filter((song) => {
           return song.release_date.includes(req.query.year);
         });
-        cache.put(`songsByGenre-${req.query.year}`); 
+        cache.put(`songsByGenre-${req.query.year}`, songsByGenre); 
       }
     }
 
