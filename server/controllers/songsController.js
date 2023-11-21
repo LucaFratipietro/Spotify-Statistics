@@ -1,4 +1,5 @@
 const { DB } = require('../db/db.js');
+const cache = require('memory-cache');
 // const { extractYear } = require('../utils/utils');
 const db = new DB();
 
@@ -9,8 +10,12 @@ const db = new DB();
  * @returns {JSON} - returns all songs from the DB, if year is specified, only from that year
  */
 async function allSongs(req, res) {
-  try{
-    let allSongs = await db.getAllSongs();
+  try {
+    let allSongs = cache.get('allSongs');
+    if(!allSongs) {
+      allSongs = await db.getAllSongs();
+      cache.put('allSongs', allSongs);
+    }
     
     if(!Array.isArray(allSongs)){
       allSongs = await allSongs.toArray();
@@ -18,9 +23,13 @@ async function allSongs(req, res) {
     
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
-      allSongs = allSongs.filter((song) => {
-        return song.release_date.includes(req.query.year);
-      });
+      allSongs = cache.get(`allSongs-${req.query.year}`);
+      if(!allSongs) {
+        allSongs = allSongs.filter((song) => {
+          return song.release_date.includes(req.query.year);
+        });
+        cache.put(`allSongs-${req.query.year}`);
+      }
     }
 
     if(allSongs.length === 0){
@@ -49,8 +58,12 @@ async function allSongsByGenre(req, res){
   // if(req.params.genre.toLowerCase().trim() === 'years') {
   //   allYears(req, res);
   // } else {
-  try{
-    let songsByGenre = await db.getAllSongs(req.params.genre);
+  try {
+    let songsByGenre = cache.get('songsByGenre');
+    if(!songsByGenre) {
+      songsByGenre = await db.getAllSongs(req.params.genre);
+      cache.put('songsByGenre', songsByGenre);
+    }
     
     if(!Array.isArray(songsByGenre)){
       songsByGenre = await songsByGenre.toArray();
@@ -58,9 +71,14 @@ async function allSongsByGenre(req, res){
     
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
-      songsByGenre = songsByGenre.filter((song) => {
-        return song.release_date.includes(req.query.year);
-      });
+      
+      songsByGenre = cache.get(`songsByGenre-${req.query.year}`);
+      if(!songsByGenre) {
+        songsByGenre = songsByGenre.filter((song) => {
+          return song.release_date.includes(req.query.year);
+        });
+        cache.put(`songsByGenre-${req.query.year}`); 
+      }
     }
 
     if(songsByGenre.length === 0){
