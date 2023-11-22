@@ -33,7 +33,11 @@ async function allSongs(req, res) {
       }
     }
 
-    if(allSongs.length === 0) {
+    // get unique songs
+    const uniqueSongs = Array.from(new Set(allSongs.map(song => song.id))).
+      map(id => allSongs.find(song => song.id === id));
+
+    if(uniqueSongs.length === 0) {
       res.type('json');
       const message = 'Did not return any results. Try another year in the query parameter';
       res.status(404).json({error: message});
@@ -41,7 +45,7 @@ async function allSongs(req, res) {
     }
 
     res.type('json');
-    res.json(allSongs);
+    res.json(uniqueSongs);
   } catch (e) {
     console.error(e.message);
     res.sendStatus(500).json({error: e.message});
@@ -82,7 +86,11 @@ async function allSongsByGenre(req, res){
       }
     }
 
-    if(songsByGenre.length === 0){
+    // get unique songs
+    const uniqueSongs = Array.from(new Set(songsByGenre.map(song => song.id))).
+      map(id => songsByGenre.find(song => song.id === id));
+
+    if(uniqueSongs.length === 0){
       res.type('json');
       res.status(404).json({error: `Genre ${req.params.genre} 
       did not return any results. Try another genre`});
@@ -90,7 +98,7 @@ async function allSongsByGenre(req, res){
     }
 
     res.type('json');
-    res.json(songsByGenre);
+    res.json(uniqueSongs);
   } catch (e) {
     console.error(e.message);
     res.sendStatus(500).json({error: e.message});
