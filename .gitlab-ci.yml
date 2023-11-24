@@ -72,4 +72,4 @@ build-app-archive:
   artifacts:
     expire_in: "30 days"
     paths:
-      - "$RELEASE_FILE.tar.gz"
+      - "$RELEASE_FILE"
