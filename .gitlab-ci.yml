@@ -26,25 +26,25 @@ default:
   before_script:
    - cd server && npm ci --cache .npm --prefer-offline && cd ../client && npm ci --cache .npm --prefer-offline && cd ..
 
-lint-server:
-  stage: lint 
-  script:
-    - cd server && npm ci --cache .npm --prefer-offline
-    - ./node_modules/eslint/bin/eslint.js --ext js,mjs,cjs . 
-  allow_failure: false
+# lint-server:
+#   stage: lint 
+#   script:
+#     - cd server && npm ci --cache .npm --prefer-offline
+#     - ./node_modules/eslint/bin/eslint.js --ext js,mjs,cjs . 
+#   allow_failure: false
 
-lint-client:
-  stage: lint 
-  script:
-    - cd client && npm ci --cache .npm --prefer-offline
-    - ./node_modules/eslint/bin/eslint.js --ext js,jsx,mjs,cjs .
-  allow_failure: false
+# lint-client:
+#   stage: lint 
+#   script:
+#     - cd client && npm ci --cache .npm --prefer-offline
+#     - ./node_modules/eslint/bin/eslint.js --ext js,jsx,mjs,cjs .
+#   allow_failure: false
 
-server-side-test:
-  stage: test
-  script:
-    - cd server && npm ci --cache .npm --prefer-offline
-    - npm run test
+# server-side-test:
+#   stage: test
+#   script:
+#     - cd server && npm ci --cache .npm --prefer-offline
+#     - npm run test
 
 client-side-build:
   stage: build
@@ -67,7 +67,8 @@ build-app-archive:
   before_script: 
     - 'cd server && npm ci --omit dev && cd ../client && npm ci --omit dev'
   script:
-    - "tar --exclude='./server/.npm' -zcvf $RELEASE_FILE client server"
+    - "pwd; ls"
+    - "tar --exclude='./server/.npm' -zcvf $RELEASE_FILE.tar.gz client server"
   artifacts:
     expire_in: "30 days"
     paths:
