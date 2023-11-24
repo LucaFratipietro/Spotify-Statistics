@@ -65,7 +65,7 @@ build-app-archive:
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
   before_script: 
-    - 'cd server && npm ci --omit dev && cd ../client && npm ci --omit dev'
+    - 'cd server && npm ci --omit dev && cd ../client && npm ci --omit dev && cd ../'
   script:
     - "pwd; ls"
     - "tar --exclude='./server/.npm' -zcvf $RELEASE_FILE.tar.gz client server"
