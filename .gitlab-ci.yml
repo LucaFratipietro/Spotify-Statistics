@@ -65,10 +65,10 @@ build-app-archive:
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
   before_script: 
-    - 'cd server && npm ci --omit dev && cd ../client && npm ci --omit dev && cd ../'
+    - 'cd server && npm ci --omit dev && cd ../'
   script:
-    - "pwd; ls"
-    - "tar --exclude='./server/.npm' --exclude='./client/.npm' -zcvf $RELEASE_FILE.tar.gz client/* server/*"
+    - "mkdir client; mv build client"
+    - "tar --exclude='./server/.npm' --exclude='./client/.npm' -zcvf $RELEASE_FILE client server"
   artifacts:
     expire_in: "30 days"
     paths:
