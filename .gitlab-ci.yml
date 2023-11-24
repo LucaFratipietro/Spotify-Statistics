@@ -54,7 +54,7 @@ client-side-build:
     expire_in: 1 days
     when: on_success
     paths:
-      - client
+      - client/build
 
 build-app-archive:
   stage: release
@@ -68,7 +68,7 @@ build-app-archive:
     - 'cd server && npm ci --omit dev && cd ../client && npm ci --omit dev && cd ../'
   script:
     - "pwd; ls"
-    - "tar --exclude='./server/.npm' -zcvf $RELEASE_FILE.tar.gz client server"
+    - "tar --exclude='./server/.npm' --exclude='./client/.npm' -zcvf $RELEASE_FILE.tar.gz client/* server/*"
   artifacts:
     expire_in: "30 days"
     paths:
