@@ -64,6 +64,7 @@ build-app-archive:
     - client-side-build
   rules:
     - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == "deployment-automation"
   before_script: 
     - 'cd server && npm ci --omit dev && cd ../client && npm ci --omit dev'
   script:
