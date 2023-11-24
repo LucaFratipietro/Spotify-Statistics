@@ -54,7 +54,7 @@ client-side-build:
     expire_in: 1 days
     when: on_success
     paths:
-      - client/build
+      - client
 
 build-app-archive:
   stage: release
