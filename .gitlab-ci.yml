@@ -67,7 +67,8 @@ build-app-archive:
   before_script: 
     - 'cd server && npm ci --omit dev && cd ../'
   script:
-    - "mkdir client; mv build client"
+    # - "mkdir client; mv build client"
+    - 'ls -al client'
     - "tar --exclude='./server/.npm' --exclude='./client/.npm' -zcvf $RELEASE_FILE client server"
   artifacts:
     expire_in: "30 days"
