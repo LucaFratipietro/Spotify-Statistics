@@ -1,34 +1,28 @@
-520 Project
-Express + React app
-Description: 
+# 520 Project-_-MERN Stack Web Application
+## Description: 
+> This app provides information about some of the top songs from the past 50 years based from Spotify. Displaying the data through a graph, where individual genres and decades can be shown and the top songs from those criteria are shown through a list of generated data. under the fold.
 
-Structure
-There are two directories in the root of the project.
+## Structure
+2 directories in the root of the project.
 
-The Express server is in server/
+Express server: `server/`
 
-The React app is in `client/build`
-The server responsd to API calls and serves the built React app.
+React app: `client/build`
 
-Setup
-To install all the dependencies and build the React app run:
+The server responds to API calls and serves the built React app.
 
-npm run build
+## Setup
+### To install all the dependencies and build the React app, from the root of the project, run:
 
-To run the app
+    npm run build
 
-Just the client
+### Run Application
 
-cd client
-npm start
+    npm run start 
+    \
+      -> runs the full-stack application on localhost:3001
 
-Just the server
+## Deployment Steps
+The application is currently deployed through AWS on IP `99.79.36.74`. Accessing this IP through the browser will show the current application deployed through AWS.
 
-in the base of the repo
-npm run start -- runs the server on localhost:3000
-
-Client and Server
-
-npm run start
-
-
+### To Redeploy:
