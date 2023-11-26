@@ -59,8 +59,6 @@ We could have gone about this in a couple ways. There was the idea of adding a p
 
 We decided that we could increase the number of songs to 50, since those lower ones would make use of lazy-loading, and would therefore not impact performance for the most part on the initial load.
 
-
-
 ## Conclusion
 
 <!-- Summarize which changes had the greatest impact, note any surprising results and list 2-3 main 
