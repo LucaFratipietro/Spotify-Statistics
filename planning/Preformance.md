@@ -67,7 +67,7 @@ Lead: Luca
 
 Initialy, the top songs for each genre and decade was being handled entirely on the client side. The components would take in the selected genre and decade, and do a sort/filter/split on all the initial fetched songs. 
 
-Instead of doing 
+Instead of doing that, we can try to define an endpoint that can leverage a database ability 
 
 ## Conclusion
 
