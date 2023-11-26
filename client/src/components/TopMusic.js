@@ -38,7 +38,7 @@ export default function TopMusic({songs, genre, decade}){
   //sort array by most popular songs -- and get the top 20
   filteredSongs = filteredSongs.sort((a, b) => a.popularity < b.popularity ? 1 
     : b.popularity < a.popularity ? -1 : 0);
-  const slicedSongs = filteredSongs.slice(0, 20);
+  const slicedSongs = filteredSongs.slice(0, 50);
 
   if(slicedSongs.length === 0){
     return(

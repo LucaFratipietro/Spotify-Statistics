@@ -21,7 +21,7 @@ Two clear areas of improvment here; Try to limit the amount of image requests on
 
 ![LCP](./images/table_initial.png)
 
-3000ms of fetching from 6000 plus songs from the DB. Improving there can lead to massive improvments
+3000ms of fetching from 6000 plus songs from the DB. Improving there can lead to massive improvments.
 
 ---
 
@@ -49,7 +49,17 @@ This could be causing the intial page load to be longer since we fetch extra dat
 
 This is a marked improvment, cutting the size of the of the payload in half. There was also a small improvment to the speed metric of lighthouse, going from 2.3s to around 2.0 - 1.9s. This once again made sense, since a smaller payload for the songs data means we can fetch it faster, and in turn display it in our chart.js line graph quicker.
 
-Lead: <!-- name main contributor to this change -->
+### Change 2.1 -- Lazy loading album cover images that are below the fold
+
+Lead: Luca
+
+The album cover images are another source of potential performance improvment. The album cover images are not stored locally, but are each individually fetched by sending an individual get request to the Spotify API. We initially set the max number of songs to appear in the TopMusic section to be 20, which was an abritrary number, but those images are to close to the intial viewport so they are all fetched and loaded when on the intial load of the website. 
+
+We could have gone about this in a couple ways. There was the idea of adding a padding to the bottom of the graph component to push the TopMusic component down enough to lazy load some of the images. This had the issue of only lazy loading the last 5 or so album image covers, which is not worth it considering it also made the website UI really segemented, ugly and bad. Another idea was to just have a button that onclick would load the images, but that again seemed to segment our UI too much, and it would not have the same flow that our current UI does, where you can just scroll past the graph to get a bunch of albums.
+
+We decided that we could increase the number of songs to 50, since those lower ones would make use of lazy-loading, and would therefore not impact performance for the most part on the initial load.
+
+
 
 ## Conclusion
 
