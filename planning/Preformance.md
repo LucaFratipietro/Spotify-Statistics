@@ -47,9 +47,11 @@ This could be causing the intial page load to be longer since we fetch extra dat
 ### After -- /songs size is 305 kb
 ![LCP](./images/payload_after.png)
 
+* Note, these screenshots come from the development server and not the deployed build. Still, these changes would track in helping reduce file size in deployment.
+
 This is a marked improvment, cutting the size of the of the payload in half. There was also a small improvment to the speed metric of lighthouse, going from 2.3s to around 2.0 - 1.9s. This once again made sense, since a smaller payload for the songs data means we can fetch it faster, and in turn display it in our chart.js line graph quicker.
 
-### Change 2.1 -- Lazy loading album cover images that are below the fold
+### Change 2 -- Lazy loading album cover images that are below the fold
 
 Lead: Luca
 
@@ -58,6 +60,14 @@ The album cover images are another source of potential performance improvment. T
 We could have gone about this in a couple ways. There was the idea of adding a padding to the bottom of the graph component to push the TopMusic component down enough to lazy load some of the images. This had the issue of only lazy loading the last 5 or so album image covers, which is not worth it considering it also made the website UI really segemented, ugly and bad. Another idea was to just have a button that onclick would load the images, but that again seemed to segment our UI too much, and it would not have the same flow that our current UI does, where you can just scroll past the graph to get a bunch of albums.
 
 We decided that we could increase the number of songs to 50, since those lower ones would make use of lazy-loading, and would therefore not impact performance for the most part on the initial load.
+
+### Change 3 -- Fetching the top songs of each genre
+
+Lead: Luca
+
+Initialy, the top songs for each genre and decade was being handled entirely on the client side. The components would take in the selected genre and decade, and do a sort/filter/split on all the initial fetched songs. 
+
+Instead of doing 
 
 ## Conclusion
 
