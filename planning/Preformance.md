@@ -8,20 +8,20 @@ We first gathered preformance data using Lighthouse
 
 ![LCP](./images/LCP_initial.PNG)
 
-The two biggest problem areas we see is the LCP, which is quite high at 3.4 second. Lighthouse says that the h1 for "Top Music of All time" is the LCP. The render delay is over 3 seconds, which makes sense, since this component only renders once the intial fetch of all the songs is completed from the API. This was a good place to start improving preformance. If we can limit the intial fetch time of the main window by reducing the amount of data we fetch from the API, we can imporve the LCP and general preformance of the website
+The two biggest problem areas we see is the LCP, which is quite high at 3.4 second. Lighthouse says that the h1 for "Top Music of All time" is the LCP. The render delay is over 3 seconds, which makes sense, since this component only renders once the intial fetch of all the songs is completed from the API. This was a good place to start improving preformance. If we can limit the intial fetch time of the main window by reducing the amount of data we fetch from the API, we can imporve the speed and general preformance of the website
 
-![LCP](./images/H1.PNG)
+![LCP](./images/H1.png)
 
 Then, we took a look at whatdoesmysitecost.
 
-![LCP](./images/wdmsc_initial.PNG)
-![LCP](./images/bytes_initial.PNG)
+![LCP](./images/wdmsc_initial.png)
+![LCP](./images/bytes_initial.png)
 
 Two clear areas of improvment here; Try to limit the amount of image requests on the intial load, since over 80% of all requests are image requests. The other category is worse
 
-![LCP](./images/table_initial.PNG)
+![LCP](./images/table_initial.png)
 
-3000ms of render blocking fetching of 6000 plus songs from the DB. Improving there can lead to massive improvments
+3000ms of fetching from 6000 plus songs from the DB. Improving there can lead to massive improvments
 
 ---
 
@@ -39,16 +39,15 @@ Lead: Luca
 Currently, the original fetch allSongs endpoint was returning all the data from the songs,
 even though we only used a select number of fields (Genre, songname, artist etc.) to generate our main line graph
 
-This could be causing the Largest Contentful Paint (LCP) of the intial page load to be longer
-since we fetch extra data in the initial useEffect which is render blocking. The faster we fetch data, the faster things will load.
+This could be causing the intial page load to be longer since we fetch extra data in the initial useEffect which is render blocking. The faster we fetch data, the faster things will load. By reducing the size of the inital fetch, we can also decrease the size of the payload.
 
-### Before -- LCP is 3.0s
+### Before -- /songs size is 760 kb
+![LCP](./images/payload_initial.png)
 
-![LCP](./images/LCP.PNG)
+### After -- /songs size is 305 kb
+![LCP](./images/payload_after.png)
 
-### After
-
-### <!-- Change n -->
+This is a marked improvment, cutting the size of the of the payload in half. There was also a small improvment to the speed metric of lighthouse, going from 2.3s to around 2.0 - 1.9s. This once again made sense, since a smaller payload for the songs data means we can fetch it faster, and in turn display it in our chart.js line graph quicker.
 
 Lead: <!-- name main contributor to this change -->
 
