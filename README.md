@@ -23,6 +23,6 @@ The server responds to API calls and serves the built React app.
       -> runs the full-stack application on localhost:3001
 
 ## Deployment Steps
-The application is currently deployed through AWS at ![The following URL](http://99.79.36.74/). Accessing this IP through the browser will show the current application deployed through AWS.
+The application is currently deployed through AWS at ![99.79.36.74](http://99.79.36.74/). Accessing this IP through the browser will show the current application deployed through AWS.
 
 ### To Redeploy:
