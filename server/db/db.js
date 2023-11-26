@@ -56,7 +56,8 @@ class DB {
   async getAllSongs(genre = '') {
     if (genre === '') {
       //return only required fields
-      const projection = { Genre : 1, Title: 1, Album_cover_link: 1, popularity: 1, release_date: 1, tempo: 1}
+      const projection = { Genre : 1, Title: 1, Album_cover_link: 1, popularity: 1,
+        release_date: 1, tempo: 1};
       return await instance.collection.find().project(projection);
     }
     return await instance.collection.find({ Genre: genre });
