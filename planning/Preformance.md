@@ -28,12 +28,6 @@ Two clear areas of improvment here; Try to limit the amount of image requests on
 After improvments of whatdoesmysitecost go here
 
 
-<!-- Briefly state how you gathered data about app performance, and in what environment 
-(which browsers, what browser versions, what kind of device, OS,
-width and height of viewport as reported in the console with `window.screen) -->
-
-<!-- Also report overall impact on whatdoesmysitecost results before and after all your changes -->
-
 ## Areas to Improve
 
 ## Summary of Changes 
@@ -46,7 +40,7 @@ Currently, the original fetch allSongs endpoint was returning all the data from 
 even though we only used a select number of fields (Genre, songname, artist etc.) to generate our main line graph
 
 This could be causing the Largest Contentful Paint (LCP) of the intial page load to be longer
-since we fetch extra data in the initial useEffect
+since we fetch extra data in the initial useEffect which is render blocking. The faster we fetch data, the faster things will load.
 
 ### Before -- LCP is 3.0s
 
