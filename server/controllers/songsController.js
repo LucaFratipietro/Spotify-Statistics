@@ -50,8 +50,8 @@ async function allSongsByGenre(req, res){
   //   allYears(req, res);
   // } else {
   try{
-    let songsByGenre = await db.getAllSongs(req.params.genre);
-    
+    let songsByGenre = await db.getAllSongsOfGenre(req.params.genre);
+
     if(!Array.isArray(songsByGenre)){
       songsByGenre = await songsByGenre.toArray();
     }
@@ -73,7 +73,6 @@ async function allSongsByGenre(req, res){
     res.type('json');
     res.json(songsByGenre);
   } catch (e) {
-    console.error(e.message);
     res.sendStatus(500).json({error: e.message});
   }
   // }

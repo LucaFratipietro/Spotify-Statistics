@@ -52,13 +52,10 @@ describe('GET /songs', () => {
   });
 });
 
-//Get all songs by genre -- WORK IN PROGESS, BUG
 
-/*
-
-describe('GET /songs/:genre?year=invalid', () => {
-  test('Year returns no number, should be 404', async () => {
-    jest.spyOn(DB.prototype, 'getAllSongs', ).mockResolvedValue(
+describe('GET /songs/:genre', () => {
+  test('Get all songs with genre = rock', async () => {
+    jest.spyOn(DB.prototype, 'getAllSongsOfGenre').mockResolvedValue(
       [{ Genre : 'rock', Title : 'The first Song', release_date : "2002" },
       { Genre : 'pop', Title : 'The second', release_date : "1998"},
       { Genre : 'rap', Title : 'Sleep', release_date : "2002-11-11"}]
@@ -75,8 +72,8 @@ describe('GET /songs/:genre?year=invalid', () => {
 });
 
 describe('GET /songs/:genre', () => {
-  test('Respond all objects with Genre = rock', async () => {
-    jest.spyOn(DB.prototype, 'getAllSongs', ).mockResolvedValue(
+  test('Should return no songs, and respond with a 404', async () => {
+    jest.spyOn(DB.prototype, 'getAllSongsOfGenre').mockResolvedValue(
       [{ Genre : 'rock', Title : 'The first Song', release_date : "2002" },
       { Genre : 'pop', Title : 'The second', release_date : "1998"},
       { Genre : 'rap', Title : 'Sleep', release_date : "2002-11-11"}]
@@ -84,10 +81,10 @@ describe('GET /songs/:genre', () => {
 
     const response = await request(app).get('/songs/rnb');
     expect(response.body).toEqual(
-      [{}]
+      {}
     );
     expect(response.statusCode).toBe(404);
     expect(response.type).toEqual('application/json');
 
   });
-}); */
+});
