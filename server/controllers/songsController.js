@@ -12,13 +12,14 @@ const db = new DB();
 async function allSongs(req, res) {
   try {
     let allSongs = cache.get('allSongs');
+
     if(!allSongs) {
       allSongs = await db.getAllSongs();
-      cache.put('allSongs', allSongs);
     }
     
     if(!Array.isArray(allSongs)){
       allSongs = await allSongs.toArray();
+      cache.put('allSongs', allSongs);
     }
     
     //check if query param for year was passed, if so, filter results by year
@@ -34,9 +35,9 @@ async function allSongs(req, res) {
     }
 
     // get unique songs
-    const uniqueSongs = Array.from(new Set(allSongs.map(song => song.id)))
-      .map(id => allSongs.filter(song => song.id === id))
-      .flat();
+    const uniqueSongs = Array.from(new Set(allSongs.map(song => song.id))).
+      map(id => allSongs.filter(song => song.id === id)).
+      flat();
 
     if(uniqueSongs.length === 0) {
       res.type('json');
@@ -68,11 +69,11 @@ async function allSongsByGenre(req, res){
     let songsByGenre = cache.get('songsByGenre');
     if(!songsByGenre) {
       songsByGenre = await db.getAllSongs(req.params.genre);
-      cache.put('songsByGenre', songsByGenre);
     }
     
     if(!Array.isArray(songsByGenre)){
       songsByGenre = await songsByGenre.toArray();
+      cache.put('songsByGenre', songsByGenre);
     }
     
     //check if query param for year was passed, if so, filter results by year
@@ -89,7 +90,8 @@ async function allSongsByGenre(req, res){
 
     // get unique songs
     const uniqueSongs = Array.from(new Set(songsByGenre.map(song => song.id))).
-      map(id => songsByGenre.find(song => song.id === id));
+      map(id => songsByGenre.filter(song => song.id === id)).
+      flat();
 
     if(uniqueSongs.length === 0){
       res.type('json');
