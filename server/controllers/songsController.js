@@ -62,9 +62,7 @@ async function allSongs(req, res) {
  */
 
 async function allSongsByGenre(req, res){
-  // if(req.params.genre.toLowerCase().trim() === 'years') {
-  //   allYears(req, res);
-  // } else {
+  
   try {
     let songsByGenre = cache.get(`songsByGenre-${req.params.genre}`);
     if(!songsByGenre) {
@@ -78,13 +76,12 @@ async function allSongsByGenre(req, res){
     
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
-      
-      songsByGenre = cache.get(`songsByGenre-${req.query.year}`);
+      songsByGenre = cache.get(`songsByGenre-${req.params.genre}-${req.query.year}`);
       if(!songsByGenre) {
         songsByGenre = songsByGenre.filter((song) => {
           return song.release_date.includes(req.query.year);
         });
-        cache.put(`songsByGenre-${req.query.year}`, songsByGenre); 
+        cache.put(`songsByGenre-${req.params.genre}-${req.query.year}`, songsByGenre); 
       }
     }
 
@@ -94,9 +91,8 @@ async function allSongsByGenre(req, res){
       flat();
 
     if(uniqueSongs.length === 0){
-      res.type('json');
-      res.status(404).json({error: `Genre ${req.params.genre} 
-      did not return any results. Try another genre`});
+      // eslint-disable-next-line max-len
+      res.status(404).json({error: `Genre ${req.params.genre} did not return any results. Try another genre`});
       return;
     }
 
