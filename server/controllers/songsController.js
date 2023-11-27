@@ -76,15 +76,16 @@ async function allSongsByGenre(req, res){
     
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
-      songsByGenre = cache.get(`songsByGenre-${req.params.genre}-${req.query.year}`);
-      if(!songsByGenre) {
-        songsByGenre = songsByGenre.filter((song) => {
-          return song.release_date.includes(req.query.year);
-        });
-        cache.put(`songsByGenre-${req.params.genre}-${req.query.year}`, songsByGenre); 
+      let songsByGenreYearFilter = cache.get(`songsByGenre-${req.params.genre}-${req.query.year}`);
+      if(songsByGenreYearFilter) {
+        songsByGenre = songsByGenreYearFilter;
       }
+      songsByGenre = songsByGenre.filter((song) => {
+        return song.release_date.includes(req.query.year);
+      });
+      cache.put(`songsByGenre-${req.params.genre}-${req.query.year}`, songsByGenre); 
     }
-
+    
     // get unique songs
     const uniqueSongs = Array.from(new Set(songsByGenre.map(song => song.id))).
       map(id => songsByGenre.filter(song => song.id === id)).
