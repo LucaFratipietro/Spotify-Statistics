@@ -129,21 +129,49 @@ describe('GET /songs/rnb', () => {
 });
 
 /**
- * Unit test to test /songs API endpoint returns songs in JSON format
+ * Unit test /songs/popularity/genre to return the same data
  */
 describe('GET /songs/popularity/genre', () => {
-  test('Returns both rock songs in order of popularity', async () => {
+  test('Returns all songs in correct order', async () => {
     jest.spyOn(DB.prototype, 'getMostPopular').mockResolvedValue(
-      [{ id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 50},
+      [
+        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 98},
         { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02', popularity: 75},
-        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 98}]
+        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 45}
+      ]
     );
 
     const response = await request(app).get('/songs/popularity/rock');
     expect(response.body).toEqual(
       [
-        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 98},
-        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 50}
+        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 98},
+        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02', popularity: 75},
+        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 45}
+      ]
+    );
+    expect(response.statusCode).toBe(200);
+    expect(response.type).toEqual('application/json');
+  });
+});
+
+/**
+ * Unit test /songs/popularity/genre to filter same id
+ */
+describe('GET /songs/popularity/genre', () => {
+  test('filters the songs with the same id', async () => {
+    jest.spyOn(DB.prototype, 'getMostPopular').mockResolvedValue(
+      [
+        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 98},
+        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02', popularity: 75},
+        { id: 1, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 45}
+      ]
+    );
+
+    const response = await request(app).get('/songs/popularity/rock');
+    expect(response.body).toEqual(
+      [
+        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 98},
+        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02', popularity: 75}
       ]
     );
     expect(response.statusCode).toBe(200);

@@ -76,7 +76,8 @@ async function allSongsByGenre(req, res){
     
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
-      let songsByGenreYearFilter = cache.get(`songsByGenre-${req.params.genre}-${req.query.year}`);
+      // eslint-disable-next-line max-len
+      const songsByGenreYearFilter = cache.get(`songsByGenre-${req.params.genre}-${req.query.year}`);
       if(songsByGenreYearFilter) {
         songsByGenre = songsByGenreYearFilter;
       }
