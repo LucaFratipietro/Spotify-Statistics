@@ -101,13 +101,6 @@ async function mostPopularSongs(req, res){
       mostPopularSongs = await mostPopularSongs.toArray();
     }
     
-    if(mostPopularSongs.length === 0){
-      res.type('json');
-      res.status(404).json({error: `Genre ${req.params.genre} 
-      did not return any results. Try another genre`});
-      return;
-    }
-
     res.type('json');
     res.json(mostPopularSongs);
   } catch (e) {
