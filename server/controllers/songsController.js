@@ -88,10 +88,10 @@ async function allSongsByGenre(req, res){
 
 async function mostPopularSongs(req, res){
 
-  chosenDecade = req.query.year
+  chosenDecade = req.query.year;
 
   if(req.query.year == undefined){
-    chosenDecade = "" 
+    chosenDecade = ''; 
   }
 
   try{
