@@ -67,7 +67,19 @@ Lead: Luca
 
 Initialy, the top songs for each genre and decade was being handled entirely on the client side. The components would take in the selected genre and decade, and do a sort/filter/split on all the initial fetched songs. 
 
-Instead of doing that, we can try to define an endpoint that can leverage a database ability 
+Instead of doing that, we can try to define an endpoint that can leverage a database ability to sort and search data faster than manual js methods.
+
+![LCP](./images/TopMusic.png)
+
+We can see, the loading of the TopMusic component is no longer needs to wait for songs to fetch. This allows it to load much faster...
+
+...but not without other issues. The TopMusic loading faster and usually BEFORE the graph causes a very large cumulative layout shift, and is jarring to the eyes to see all the data jump down when the graph is done loading. 
+
+We could have a check to only display this components when the songs is done fetching, which would lower some of the benefit, but still be a smaller improvment since the components will be ready to go the moment the graph is displayed. -- TODO
+
+### Change 4 -- Caching
+
+Lead: Adriano
 
 ## Conclusion
 
