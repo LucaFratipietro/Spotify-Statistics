@@ -14,16 +14,16 @@ export default function TopMusic({genre, decade}){
 
   const [topSongs, setTopSongs] = useState([]);
 
-  let fetchString = '';
-  if(decade === 'AllYears'){
-    fetchString = `/songs/popularity/${genre}`;
-  }else{
-    fetchString = `/songs/popularity/${genre}?year=${decade.slice(0, -1)}`;
-  }
-
   //fetch the topSongs based on genre and decade
   useEffect(() => {
     async function getTopSongs(){
+
+      let fetchString = '';
+      if(decade === 'AllYears'){
+        fetchString = `/songs/popularity/${genre}`;
+      }else{
+        fetchString = `/songs/popularity/${genre}?year=${decade.slice(0, -1)}`;
+      }
 
       const response = await fetch(fetchString);
       if(!response.ok) {
