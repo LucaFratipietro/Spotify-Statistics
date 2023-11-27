@@ -33,10 +33,16 @@ export default function Main() {
 
   return (
     <>
-      <NavBar handler={handleSearch}/>  
-      <Graph songs={songs} genre={genre}/>
-      <TopMusic songs={songs} genre={genre} decade={year}/>
-
+      <NavBar handler={handleSearch}/> 
+      {songs.length > 0 ?
+        <>
+          <Graph songs={songs} genre={genre}/>
+          <hr></hr>
+          <TopMusic songs={songs} genre={genre} decade={year}/>
+        </>
+        :
+        <img id="load" src="./images/load.gif" alt="load"/>
+      }
     </>
   );
 
