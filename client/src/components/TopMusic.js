@@ -10,7 +10,7 @@ import {useEffect, useState} from 'react';
  * @param   {string} decade decade for fetching results
  * @return  {JSX}  
  */
-export default function TopMusic({genre, decade}){
+export default function TopMusic({genre, decade, theme}){
 
   const [topSongs, setTopSongs] = useState([]);
 
@@ -78,7 +78,7 @@ export default function TopMusic({genre, decade}){
   );
 
   return(
-    <section id="bottom-section">
+    <section className={`bottom-section ${theme}`}>
       <h1>Top {utils.genreToPrint(genre)} Hits {utils.decadeToPrint(decade)}</h1>
       <div id="top-songs">
         {listSongs}
