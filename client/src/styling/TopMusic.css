@@ -12,6 +12,10 @@
     width: 90%;
 }
 
+#top-songs-before{
+    display: none;
+}
+
 .music-square{
     width: 150px;
     text-align: center;
