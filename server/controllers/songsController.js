@@ -34,8 +34,9 @@ async function allSongs(req, res) {
     }
 
     // get unique songs
-    const uniqueSongs = Array.from(new Set(allSongs.map(song => song.id))).
-      map(id => allSongs.find(song => song.id === id));
+    const uniqueSongs = Array.from(new Set(allSongs.map(song => song.id)))
+      .map(id => allSongs.filter(song => song.id === id))
+      .flat();
 
     if(uniqueSongs.length === 0) {
       res.type('json');
