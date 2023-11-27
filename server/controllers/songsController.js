@@ -80,6 +80,44 @@ async function allSongsByGenre(req, res){
 }
 
 /**
+ * Makes a call to the DB object for the most popular songs of a decade/genre
+ * @param {string} genre - Required enpoint param
+ * @param {string} year - optional query param
+ * @returns {JSON} - returns all songs from the DB of a specific genre
+ */
+
+async function mostPopularSongs(req, res){
+
+  chosenDecade = req.query.year
+
+  if(req.query.year == undefined){
+    chosenDecade = "" 
+  }
+
+  try{
+    let mostPopularSongs = await db.getMostPopular(req.params.genre, chosenDecade);
+    
+    if(!Array.isArray(mostPopularSongs)){
+      mostPopularSongs = await mostPopularSongs.toArray();
+    }
+    
+    if(mostPopularSongs.length === 0){
+      res.type('json');
+      res.status(404).json({error: `Genre ${req.params.genre} 
+      did not return any results. Try another genre`});
+      return;
+    }
+
+    res.type('json');
+    res.json(mostPopularSongs);
+  } catch (e) {
+    console.error(e.message);
+    res.sendStatus(500).json({error: e.message});
+  }
+
+}
+
+/**
  * Makes a call to the DB object for all years from the DB
  * @returns {JSON} - returns all years from the DB for each song
  */
@@ -104,5 +142,6 @@ async function allSongsByGenre(req, res){
 
 module.exports = {
   allSongs,
-  allSongsByGenre
+  allSongsByGenre,
+  mostPopularSongs
 };

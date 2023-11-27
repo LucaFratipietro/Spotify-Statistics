@@ -108,4 +108,6 @@ router.get('/', songsController.allSongs);
  */
 router.get('/:genre', songsController.allSongsByGenre);
 
+router.get('/popularity/:genre', songsController.mostPopularSongs);
+
 module.exports = router;

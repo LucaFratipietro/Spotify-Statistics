@@ -81,12 +81,12 @@ class DB {
    */
   async getMostPopular(genre, decade) {
     
-    const querey = {Genre : genre, release_date : {$regex : decade}};
-    const sort = { popularity: 1 };
+    const query = {Genre : genre, release_date : {$regex : decade}};
+    const sort = { popularity: -1 };
     const limit = 50;
     const projection = { Genre : 1, Title: 1, Album_cover_link: 1, popularity: 1,
         release_date: 1};
-    return await instance.collection.find(querey).sort(sort).limit(50).project(projection);
+    return await instance.collection.find(query).sort(sort).limit(50).project(projection);
     
   }
 }
