@@ -6,8 +6,6 @@
 }
 
 .graph {
-    height: 100%;
-    max-width: 125vh; 
-    width: 100%; 
-    margin: auto;
+    height: 70vh;
+    width: 60vw; 
 }

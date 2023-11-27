@@ -1,7 +1,14 @@
-#bottom-section{
+.bottom-section.light{
     align-items: center;
     display: flex;
     flex-direction: column;
+}
+
+.bottom-section.dark{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(34 34 34);
 }
 
 #top-songs{

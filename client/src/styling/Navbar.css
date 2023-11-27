@@ -8,6 +8,23 @@ nav.light {
     align-items: center;
 }
 
+select {
+    margin-left: 5px;
+    height: fit-content;
+    font-size: 1em;
+    width: fit-content;
+    text-align: center;
+}
+
+option, nav button {
+    font-family: "Segoe UI Variable", sans-serif;
+}
+
+form button {
+    height: 3vh;
+    font-size: 1em;
+}
+
 nav.dark {
     height: fit-content;
     background-color: #245724;
@@ -16,6 +33,11 @@ nav.dark {
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
+}
+
+#discover {
+    width: fit-content;
+    height: fit-content;
 }
 
 nav.dark button, nav.dark select {
@@ -36,19 +58,10 @@ nav.dark label {
     color: black;
 }
 
-option, nav button {
-    font-family: "Segoe UI Variable", sans-serif;
-}
-
 #title-buttons {
     display: flex;
     justify-content: left;
     align-items: center;
-}
-
-form button {
-    height: 3vh;
-    font-size: 1em;
 }
 
 #title-buttons button {
@@ -74,14 +87,6 @@ form button {
     padding-right: 10px;
 }
 
-select {
-    margin-left: 5px;
-    height: fit-content;
-    font-size: 1em;
-    width: fit-content;
-    text-align: center;
-}
-
 select option {
     text-align: center;
 }
@@ -96,29 +101,4 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@media (width < 1121px) {
-    nav {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 1em;
-    }
-
-    nav #title-buttons {
-        display: flex;
-        justify-content: center;
-    }
-
-    #navbar-logo {
-        display: none;
-    }
-
-    form button {
-        height: fit-content;
-        width: fit-content;
-        font-size: 1em;
-    }
 }
