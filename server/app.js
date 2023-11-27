@@ -2,6 +2,7 @@ const express = require('express');
 const songs = require('./routes/songs.js');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const compression = require('compression');
 
 const swaggerDefinition = {
   openapi: '3.0.0',
@@ -29,6 +30,13 @@ const swaggerSpec = swaggerJSDoc(options);
 const app = express();
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use(compression());
+
+app.use(function (req, res, next) {
+  res.set('Cache-control', 'public, max-age=31536000');
+  next();
+});
 
 app.get('/', (req, res, next) => {
   next();
