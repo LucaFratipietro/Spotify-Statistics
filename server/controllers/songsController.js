@@ -125,14 +125,24 @@ async function mostPopularSongs(req, res){
   }
 
   try{
-    let mostPopularSongs = await db.getMostPopular(req.params.genre, chosenDecade);
+    let mostPopularSongs = cache.get(`mostPopular-${req.params.genre}-${chosenDecade}`);
+    // let mostPopularSongs = await db.getMostPopular(req.params.genre, chosenDecade);
+    if(!mostPopularSongs) {
+      mostPopularSongs = await db.getMostPopular(req.params.genre, chosenDecade);
+    }
     
     if(!Array.isArray(mostPopularSongs)){
       mostPopularSongs = await mostPopularSongs.toArray();
+      cache.put(`mostPopular-${req.params.genre}-${chosenDecade}`, mostPopularSongs);
     }
+
+    // get unique songs
+    const uniqueSongs = Array.from(new Set(mostPopularSongs.map(song => song.id))).
+      map(id => mostPopularSongs.filter(song => song.id === id)).
+      flat();
     
     res.type('json');
-    res.json(mostPopularSongs);
+    res.json(uniqueSongs);
   } catch (e) {
     console.error(e.message);
     res.sendStatus(500).json({error: e.message});
