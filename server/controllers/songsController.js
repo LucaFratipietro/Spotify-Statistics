@@ -1,4 +1,5 @@
 const { DB } = require('../db/db.js');
+const cache = require('memory-cache');
 // const { extractYear } = require('../utils/utils');
 const db = new DB();
 
@@ -9,8 +10,12 @@ const db = new DB();
  * @returns {JSON} - returns all songs from the DB, if year is specified, only from that year
  */
 async function allSongs(req, res) {
-  try{
-    let allSongs = await db.getAllSongs();
+  try {
+    let allSongs = cache.get('allSongs');
+    if(!allSongs) {
+      allSongs = await db.getAllSongs();
+      cache.put('allSongs', allSongs);
+    }
     
     if(!Array.isArray(allSongs)){
       allSongs = await allSongs.toArray();
@@ -18,12 +23,21 @@ async function allSongs(req, res) {
     
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
-      allSongs = allSongs.filter((song) => {
-        return song.release_date.includes(req.query.year);
-      });
+      let allSongsByYear = cache.get(`allSongs-${req.query.year}`);
+      if(!allSongsByYear) {
+        allSongsByYear = allSongs.filter((song) => {
+          return song.release_date.includes(req.query.year);
+        });
+        allSongs = allSongsByYear;
+        cache.put(`allSongs-${req.query.year}`, allSongs);
+      }
     }
 
-    if(allSongs.length === 0){
+    // get unique songs
+    const uniqueSongs = Array.from(new Set(allSongs.map(song => song.id))).
+      map(id => allSongs.find(song => song.id === id));
+
+    if(uniqueSongs.length === 0) {
       res.type('json');
       const message = 'Did not return any results. Try another year in the query parameter';
       res.status(404).json({error: message});
@@ -31,7 +45,7 @@ async function allSongs(req, res) {
     }
 
     res.type('json');
-    res.json(allSongs);
+    res.json(uniqueSongs);
   } catch (e) {
     console.error(e.message);
     res.sendStatus(500).json({error: e.message});
@@ -49,8 +63,12 @@ async function allSongsByGenre(req, res){
   // if(req.params.genre.toLowerCase().trim() === 'years') {
   //   allYears(req, res);
   // } else {
-  try{
-    let songsByGenre = await db.getAllSongs(req.params.genre);
+  try {
+    let songsByGenre = cache.get('songsByGenre');
+    if(!songsByGenre) {
+      songsByGenre = await db.getAllSongs(req.params.genre);
+      cache.put('songsByGenre', songsByGenre);
+    }
     
     if(!Array.isArray(songsByGenre)){
       songsByGenre = await songsByGenre.toArray();
@@ -58,12 +76,21 @@ async function allSongsByGenre(req, res){
     
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
-      songsByGenre = songsByGenre.filter((song) => {
-        return song.release_date.includes(req.query.year);
-      });
+      
+      songsByGenre = cache.get(`songsByGenre-${req.query.year}`);
+      if(!songsByGenre) {
+        songsByGenre = songsByGenre.filter((song) => {
+          return song.release_date.includes(req.query.year);
+        });
+        cache.put(`songsByGenre-${req.query.year}`, songsByGenre); 
+      }
     }
 
-    if(songsByGenre.length === 0){
+    // get unique songs
+    const uniqueSongs = Array.from(new Set(songsByGenre.map(song => song.id))).
+      map(id => songsByGenre.find(song => song.id === id));
+
+    if(uniqueSongs.length === 0){
       res.type('json');
       res.status(404).json({error: `Genre ${req.params.genre} 
       did not return any results. Try another genre`});
@@ -71,12 +98,43 @@ async function allSongsByGenre(req, res){
     }
 
     res.type('json');
-    res.json(songsByGenre);
+    res.json(uniqueSongs);
   } catch (e) {
     console.error(e.message);
     res.sendStatus(500).json({error: e.message});
   }
   // }
+}
+
+/**
+ * Makes a call to the DB object for the most popular songs of a decade/genre
+ * @param {string} genre - Required enpoint param
+ * @param {string} year - optional query param
+ * @returns {JSON} - returns all songs from the DB of a specific genre
+ */
+
+async function mostPopularSongs(req, res){
+
+  chosenDecade = req.query.year;
+
+  if(req.query.year == undefined){
+    chosenDecade = ''; 
+  }
+
+  try{
+    let mostPopularSongs = await db.getMostPopular(req.params.genre, chosenDecade);
+    
+    if(!Array.isArray(mostPopularSongs)){
+      mostPopularSongs = await mostPopularSongs.toArray();
+    }
+    
+    res.type('json');
+    res.json(mostPopularSongs);
+  } catch (e) {
+    console.error(e.message);
+    res.sendStatus(500).json({error: e.message});
+  }
+
 }
 
 /**
@@ -104,5 +162,6 @@ async function allSongsByGenre(req, res){
 
 module.exports = {
   allSongs,
-  allSongsByGenre
+  allSongsByGenre,
+  mostPopularSongs
 };
