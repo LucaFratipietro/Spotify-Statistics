@@ -1,26 +1,89 @@
-nav{
-    height: 45px;
+nav.light {
+    height: fit-content;
     background-color: #8fbc8f;
     padding: 0 10px;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
 }
 
-.search-label{
+option, nav button {
+    font-family: "Segoe UI Variable", sans-serif;
+}
+
+#title-buttons {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+form button {
+    height: 3vh;
+    font-size: 1em;
+}
+
+#title-buttons button {
+    margin: 0 1em;
+    width: fit-content;
+    height: fit-content;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navbar-logo {
+    width: 5%;
+}
+
+#lightdark {
+    width: 3.5%;
+}
+
+.search-label {
     padding-right: 10px;
 }
 
 select {
     margin-left: 5px;
+    height: fit-content;
+    font-size: 1em;
+    width: fit-content;
+    text-align: center;
 }
 
-#title-buttons {
+select option {
+    text-align: center;
+}
+
+form {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    width: 20%;
+}
+
+@media (width < 1121px) {
+    nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1em;
+    }
+
+    nav #title-buttons {
+        display: flex;
+        justify-content: center;
+    }
+
+    #navbar-logo {
+        display: none;
+    }
+
+    form button {
+        height: fit-content;
+        width: fit-content;
+        font-size: 1em;
+    }
 }
