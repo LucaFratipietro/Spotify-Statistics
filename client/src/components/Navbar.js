@@ -35,6 +35,12 @@ export default function NavBar({handler}) {
   return (
     <nav>
       <div id="title-buttons">
+        <img 
+          onClick={() => alert('Click')}
+          id="lightdark"
+          src="./images/lightdark.png"
+          alt="lightdark"
+        />
         <img id="navbar-logo" alt="logo" src="./images/spotifylogo.png"/>
         <button className="modal-buttons" onClick={() => setOpenModal(true)}>
           Description

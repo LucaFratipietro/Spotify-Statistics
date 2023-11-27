@@ -35,6 +35,7 @@ export default function Main() {
     <>
       <NavBar handler={handleSearch}/>  
       <Graph songs={songs} genre={genre}/>
+      <hr></hr>
       <TopMusic songs={songs} genre={genre} decade={year}/>
     </>
   );

@@ -34,7 +34,11 @@ form button {
 }
 
 #navbar-logo {
-    width: 8%;
+    width: 5%;
+}
+
+#lightdark {
+    width: 3.5%;
 }
 
 .search-label {
