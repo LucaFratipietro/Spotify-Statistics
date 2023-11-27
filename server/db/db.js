@@ -81,7 +81,7 @@ class DB {
    */
   async getMostPopular(genre, decade) {
 
-    if(genre == 'AllYears'){
+    if(genre === 'AllGenres'){
       genre = '';
     }
     
