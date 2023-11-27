@@ -33,13 +33,13 @@ export default function NavBar({handler}) {
     handler(formJson.genre, formJson.decade);
   };
 
-  const handleThemeChange = () => setIsDark(true);
+  // const handleThemeChange = () => setIsDark(true);
 
   return (
     <nav class="light">
       <div id="title-buttons">
         <img 
-          onClick={() => handleThemeChange()}
+          // onClick={() => handleThemeChange()}
           id="lightdark"
           src="./images/lightdark.png"
           alt="lightdark"
