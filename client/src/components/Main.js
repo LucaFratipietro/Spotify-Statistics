@@ -9,7 +9,7 @@ export default function Main() {
   //Use to update TopMusic and Graph components
   const [genre, setGenre] = useState('AllGenres');
   const [year, setYear] = useState('AllYears');
-
+  const [theme, setTheme] = useState('light');
   const [songs, setSongs] = useState([]);
 
   const handleSearch = (genre, year) => {
@@ -27,13 +27,25 @@ export default function Main() {
     setSongs(data);
   }
 
+  const toggleTheme = () => {
+    if(theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
+
   useEffect(() => {
     fetchSongs();
   }, []);
 
   return (
-    <>
-      <NavBar handler={handleSearch}/> 
+    <div className={`main-container ${theme}`}>
+      <NavBar 
+        handler={handleSearch}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      /> 
       {songs.length > 0 ?
         <>
           <Graph songs={songs} genre={genre}/>
@@ -43,7 +55,7 @@ export default function Main() {
         :
         <img id="load" src="./images/load.gif" alt="load"/>
       }
-    </>
+    </div>
   );
 
 }

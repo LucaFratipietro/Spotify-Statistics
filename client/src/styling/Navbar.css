@@ -8,6 +8,34 @@ nav.light {
     align-items: center;
 }
 
+nav.dark {
+    height: fit-content;
+    background-color: #245724;
+    padding: 0 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav.dark button, nav.dark select {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+nav.light button, nav.light select {
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+nav.dark label {
+    color: black;
+}
+
 option, nav button {
     font-family: "Segoe UI Variable", sans-serif;
 }
@@ -38,7 +66,8 @@ form button {
 }
 
 #lightdark {
-    width: 3.5%;
+    width: 4%;
+    padding: 1em;
 }
 
 .search-label {
@@ -55,6 +84,12 @@ select {
 
 select option {
     text-align: center;
+}
+
+#options-theme {
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
 
 form {
