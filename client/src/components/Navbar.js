@@ -142,7 +142,7 @@ export default function NavBar({handler, theme, toggleTheme}) {
               <option value="2020">20s</option>
             </select>
           </label>
-          <button type="submit">Discover</button>
+          <button id="discover" type="submit">Discover</button>
         </form>
         <img 
           onClick={() => {
