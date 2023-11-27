@@ -35,9 +35,7 @@ export default function NavBar({handler}) {
   return (
     <nav>
       <div id="title-buttons">
-        <p>
-        Spotify Favourites
-        </p>
+        <img id="navbar-logo" alt="logo" src="./images/spotifylogo.png"/>
         <button className="modal-buttons" onClick={() => setOpenModal(true)}>
           Description
         </button>
