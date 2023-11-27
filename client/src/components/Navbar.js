@@ -17,6 +17,7 @@ export default function NavBar({handler}) {
 
   const [openModal, setOpenModal] = useState(false);
   const [openAtr, setOpenAtr] = useState(false);
+  const [isDark, setIsDark] = useState(false); 
 
   //handle submission of form
   const handleSubmit = (e) => {
@@ -32,11 +33,13 @@ export default function NavBar({handler}) {
     handler(formJson.genre, formJson.decade);
   };
 
+  const handleThemeChange = () => setIsDark(true);
+
   return (
-    <nav>
+    <nav class="light">
       <div id="title-buttons">
         <img 
-          onClick={() => alert('Click')}
+          onClick={() => handleThemeChange()}
           id="lightdark"
           src="./images/lightdark.png"
           alt="lightdark"
