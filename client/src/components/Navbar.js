@@ -17,7 +17,7 @@ export default function NavBar({handler}) {
 
   const [openModal, setOpenModal] = useState(false);
   const [openAtr, setOpenAtr] = useState(false);
-  const [isDark, setIsDark] = useState(false); 
+  // const [isDark, setIsDark] = useState(false); 
 
   //handle submission of form
   const handleSubmit = (e) => {
