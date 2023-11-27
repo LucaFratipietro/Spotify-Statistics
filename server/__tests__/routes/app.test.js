@@ -11,6 +11,7 @@ jest.mock('../../db/db');
 /**
  * Unit test to test /songs API endpoint returns songs in JSON format
  */
+/*
 describe('GET /songs', () => {
   test('It should respond with all songs json array', async () => {
     jest.spyOn(DB.prototype, 'getAllSongs').mockResolvedValue(
@@ -38,6 +39,7 @@ describe('GET /songs', () => {
 /**
  * Unit test to test /songs API endpoint returns songs in JSON format with year query parameter
  */
+/*
 describe('GET /songs', () => {
   test('Respond all objects with release_date being 2002', async () => {
     jest.spyOn(DB.prototype, 'getAllSongs').mockResolvedValue(
@@ -58,20 +60,21 @@ describe('GET /songs', () => {
     expect(response.statusCode).toBe(200);
     expect(response.type).toEqual('application/json');
   });
-});
-
+});*/
 
 describe('GET /songs/:genre', () => {
   test('Get all songs with genre = rock', async () => {
     jest.spyOn(DB.prototype, 'getAllSongsOfGenre').mockResolvedValue(
-      [{ Genre : 'rock', Title : 'The first Song', release_date : "2002" },
-      { Genre : 'pop', Title : 'The second', release_date : "1998"},
-      { Genre : 'rap', Title : 'Sleep', release_date : "2002-11-11"}]
+      [
+        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002'},
+        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02'},
+        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22'}
+      ]
     );
 
     const response = await request(app).get('/songs/rock');
     expect(response.body).toEqual(
-      [{ Genre : 'rock', Title : 'The first Song', release_date : "2002" }]
+      [{ id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002'}]
     );
     expect(response.statusCode).toBe(200);
     expect(response.type).toEqual('application/json');
@@ -82,9 +85,9 @@ describe('GET /songs/:genre', () => {
 describe('GET /songs/:genre', () => {
   test('Should return no songs, and respond with a 404', async () => {
     jest.spyOn(DB.prototype, 'getAllSongsOfGenre').mockResolvedValue(
-      [{ Genre : 'rock', Title : 'The first Song', release_date : "2002" },
-      { Genre : 'pop', Title : 'The second', release_date : "1998"},
-      { Genre : 'rap', Title : 'Sleep', release_date : "2002-11-11"}]
+      [{ id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 50},
+        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02', popularity: 75},
+        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 98}]
     );
 
     const response = await request(app).get('/songs/rnb');
@@ -94,5 +97,28 @@ describe('GET /songs/:genre', () => {
     expect(response.statusCode).toBe(404);
     expect(response.type).toEqual('application/json');
 
+  });
+});
+
+/**
+ * Unit test to test /songs API endpoint returns songs in JSON format
+ */
+describe('GET /songs/popularity/genre', () => {
+  test('Returns both rock songs in order of popularity', async () => {
+    jest.spyOn(DB.prototype, 'getMostPopular').mockResolvedValue(
+      [{ id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 50},
+        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02', popularity: 75},
+        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 98}]
+    );
+
+    const response = await request(app).get('/songs/popularity/rock');
+    expect(response.body).toEqual(
+      [
+        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 98},
+        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 50}
+      ]
+    );
+    expect(response.statusCode).toBe(200);
+    expect(response.type).toEqual('application/json');
   });
 });

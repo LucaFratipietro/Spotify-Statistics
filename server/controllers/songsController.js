@@ -66,14 +66,14 @@ async function allSongsByGenre(req, res){
   //   allYears(req, res);
   // } else {
   try {
-    let songsByGenre = cache.get('songsByGenre');
+    let songsByGenre = cache.get(`songsByGenre-${req.params.genre}`);
     if(!songsByGenre) {
-      songsByGenre = await db.getAllSongs(req.params.genre);
+      songsByGenre = await db.getAllSongsOfGenre(req.params.genre);
     }
     
     if(!Array.isArray(songsByGenre)){
       songsByGenre = await songsByGenre.toArray();
-      cache.put('songsByGenre', songsByGenre);
+      cache.put(`songsByGenre-${req.params.genre}`, songsByGenre);
     }
     
     //check if query param for year was passed, if so, filter results by year
