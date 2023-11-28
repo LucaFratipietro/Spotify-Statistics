@@ -104,7 +104,7 @@ class DB {
     const sort = { popularity: -1 };
     const projection = { Genre : 1, Artist: 1, Title: 1, Album_cover_link: 1, popularity: 1,
       release_date: 1};
-    return await instance.collection.find(query).sort(sort).limit(50).project(projection);
+    return await instance.collection.find(query).sort(sort).limit(60).project(projection);
     
   }
 }
