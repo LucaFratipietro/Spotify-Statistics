@@ -4,12 +4,14 @@ stages:
   - lint
   - build
   - test
+  - release
 
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_COMMIT_BRANCH == "staging"
+    - if: $CI_COMMIT_TAG
 
 default:
   cache:  # Cache modules in between jobs for the same branch if package-lock.json file changes
@@ -54,3 +56,23 @@ client-side-build:
     when: on_success
     paths:
       - client/build
+
+build-app-archive:
+  stage: release
+  variables: 
+    RELEASE_FILE: release-$CI_PROJECT_NAME-$CI_COMMIT_TAG-$CI_COMMIT_SHORT_SHA.tar.gz
+  dependencies:
+    - client-side-build
+  rules:
+    - if: '$CI_COMMIT_TAG'
+  before_script: 
+    - 'cd server && npm ci --omit dev && cd ../'
+  script:
+    - "mv client/build .; rm -r client; mkdir client; mv build client; mkdir project"
+    - "rm -r ./server/.npm"
+    - "tar -zcvf $RELEASE_FILE client server"
+    - "mv $RELEASE_FILE project"
+  artifacts:
+    expire_in: "30 days"
+    paths:
+      - "project"
