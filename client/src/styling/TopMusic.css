@@ -11,6 +11,10 @@
     background-color: rgb(34 34 34);
 }
 
+#bottom-section h1 {
+    text-align: center;
+}
+
 #top-songs{
     display: flex;
     flex-wrap: wrap;

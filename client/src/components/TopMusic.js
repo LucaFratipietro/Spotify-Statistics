@@ -36,35 +36,6 @@ export default function TopMusic({genre, decade, theme}){
     getTopSongs();
   }, [genre, decade]);
 
-  /*
-  //check if genre and decade are set to filterable params
-  //if set to AllGenres, dont run the filter
-  if(genre !== 'AllGenres'){
-
-    filteredSongs = songs.filter((song) => {
-      return song.Genre.includes(genre);
-    });
-
-  }
-
-  if(decade !== 'AllYears'){
-
-    const minYear = parseInt(decade);
-    const maxYear = minYear + 9;
-
-    filteredSongs = filteredSongs.filter((song) => {
-      const releaseYear = new Date(song.release_date).getFullYear();
-      return releaseYear >= minYear && releaseYear <= maxYear; 
-    });
-
-  }
-
-  //sort array by most popular songs -- and get the top 20
-  filteredSongs = filteredSongs.sort((a, b) => a.popularity < b.popularity ? 1 
-    : b.popularity < a.popularity ? -1 : 0);
-  const slicedSongs = filteredSongs.slice(0, 50);
-  */
-
   if(topSongs.length === 0){
     return(
       <section id="bottom-section">
