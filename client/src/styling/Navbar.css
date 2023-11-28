@@ -32,6 +32,7 @@ nav.dark {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 #discover {
@@ -102,8 +103,10 @@ form {
     align-items: center;
 }
 
-@media (width <= 80vw) {
+@media (width < 700px) {
     nav.dark {
-        background-color: red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
