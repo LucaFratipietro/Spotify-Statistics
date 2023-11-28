@@ -117,3 +117,53 @@ Note Taker: Luca
 ## discussion / work
 * Simple discussion of anything left we have to do before milestone 2 submission tonight
 * couple of small bug fixes, but mostly complete
+
+# 2023-11-23 3:30, 30 minutes
+Attendess: Adriano, Luca
+
+Note Taker: Luca
+## discussion / work
+* We went over how we should be spliting up the remaining work for milestone 3
+* Discussion on some improvments we could implement
+* Limiting the size of the songs api call and lazy-loading decided
+
+# 2023-11-27 1:00, 3 hours
+Attendess: Adriano, Luca
+
+Note Taker: Luca
+## discussion / work
+* Server is now deployed and automation is working
+* FINALLY FIXED THE TESTS
+* Last of the work split up, should be good for the submission deadline
+
+***
+
+# Retrospective Meetings 2
+
+## What went well
+* Communication was consistent and useful
+* Questions were answered quickly
+* Code review helped us find potential issues in the Code
+* Generally went well and very little complaints, same as first milestone
+
+## Challenges
+
+* Again issues with testing
+* Finding a way to imporve loading speeds and mobile view
+
+## Potential Challenges
+
+* Deployment and making sure that all the project minimum requirements are met
+
+## What should they continue doing?
+
+* Continue seeking help from each other
+* Continue to remain ontract with milestones
+* Continue to make use of the issues -- really useful for knowing what to do next
+
+## What actions would you like to praise thanks for?
+* Staying on track
+* Asking for help
+* Being understanding when it comes to arrangements/disagreements
+* Keeping it professional
+* Being a great person/teammate
