@@ -1,26 +1,112 @@
-nav{
-    height: 45px;
+nav.light {
+    height: fit-content;
     background-color: #8fbc8f;
     padding: 0 10px;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
-}
-
-.search-label{
-    padding-right: 10px;
 }
 
 select {
     margin-left: 5px;
+    height: fit-content;
+    font-size: 1em;
+    width: fit-content;
+    text-align: center;
+}
+
+option, nav button {
+    font-family: "Segoe UI Variable", sans-serif;
+}
+
+form button {
+    height: 3vh;
+    font-size: 1em;
+}
+
+nav.dark {
+    height: fit-content;
+    background-color: #245724;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#discover {
+    width: fit-content;
+    height: fit-content;
+}
+
+nav.dark button, nav.dark select {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+nav.light button, nav.light select {
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+nav.dark label {
+    color: black;
 }
 
 #title-buttons {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: left;
     align-items: center;
-    width: 20%;
+}
+
+#title-buttons button {
+    margin: 0 1em;
+    width: fit-content;
+    height: fit-content;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navbar-logo {
+    width: 2rem;
+}
+
+#lightdark {
+    width: 2rem;
+    padding: 1em;
+}
+
+.search-label {
+    padding-right: 10px;
+}
+
+select option {
+    text-align: center;
+}
+
+#options-theme {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (width < 700px) {
+    nav.dark {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }

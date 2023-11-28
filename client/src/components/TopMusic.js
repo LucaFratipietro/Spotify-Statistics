@@ -1,5 +1,6 @@
 import '../styling/TopMusic.css';
 import * as utils from '../utils/displayUtils';
+import {useEffect, useState} from 'react';
 
 /**
  * returns an array of MusicSqare components based on the given
@@ -9,38 +10,33 @@ import * as utils from '../utils/displayUtils';
  * @param   {string} decade decade for fetching results
  * @return  {JSX}  
  */
-export default function TopMusic({songs, genre, decade}){
+export default function TopMusic({genre, decade, theme}){
 
-  let filteredSongs = songs;
+  const [topSongs, setTopSongs] = useState([]);
 
-  //check if genre and decade are set to filterable params
-  //if set to AllGenres, dont run the filter
-  if(genre !== 'AllGenres'){
+  //fetch the topSongs based on genre and decade
+  useEffect(() => {
+    async function getTopSongs(){
 
-    filteredSongs = songs.filter((song) => {
-      return song.Genre.includes(genre);
-    });
+      let fetchString = '';
+      if(decade === 'AllYears'){
+        fetchString = `/songs/popularity/${genre}`;
+      }else{
+        fetchString = `/songs/popularity/${genre}?year=${decade.slice(0, -1)}`;
+      }
 
-  }
+      const response = await fetch(fetchString);
+      if(!response.ok) {
+        throw new Error('Error occured fetching top songs');
+      }
 
-  if(decade !== 'AllYears'){
+      const songs = await response.json();
+      setTopSongs(songs);
+    }
+    getTopSongs();
+  }, [genre, decade]);
 
-    const minYear = parseInt(decade);
-    const maxYear = minYear + 9;
-
-    filteredSongs = filteredSongs.filter((song) => {
-      const releaseYear = new Date(song.release_date).getFullYear();
-      return releaseYear >= minYear && releaseYear <= maxYear; 
-    });
-
-  }
-
-  //sort array by most popular songs -- and get the top 20
-  filteredSongs = filteredSongs.sort((a, b) => a.popularity < b.popularity ? 1 
-    : b.popularity < a.popularity ? -1 : 0);
-  const slicedSongs = filteredSongs.slice(0, 20);
-
-  if(slicedSongs.length === 0){
+  if(topSongs.length === 0){
     return(
       <section id="bottom-section">
         <h1>You're a little ahead of the times here</h1>
@@ -48,12 +44,12 @@ export default function TopMusic({songs, genre, decade}){
     );
   }
 
-  const listSongs = slicedSongs.map((song, index) =>
+  const listSongs = topSongs.map((song, index) =>
     <MusicSquare song={song} rank = {index + 1} index = {index}/>
   );
 
   return(
-    <section id="bottom-section">
+    <section className={`bottom-section ${theme}`}>
       <h1>Top {utils.genreToPrint(genre)} Hits {utils.decadeToPrint(decade)}</h1>
       <div id="top-songs">
         {listSongs}
