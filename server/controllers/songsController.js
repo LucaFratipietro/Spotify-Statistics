@@ -166,10 +166,6 @@ async function mostPopularSongs(req, res){
 //   }
 // }
 
-/*async function topSongsByYear(req, res){
-  //STUB: NOT IMPLEMENTED
-}*/
-
 module.exports = {
   allSongs,
   allSongsByGenre,

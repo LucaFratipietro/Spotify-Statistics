@@ -61,6 +61,31 @@ describe('GET /songs', () => {
 });
 
 /**
+ * Unit test to test /songs API endpoint to return only songs with unique ids
+ */
+describe('GET /songs', () => {
+  test('Respond all objects with release_date being 2002', async () => {
+    jest.spyOn(DB.prototype, 'getAllSongs').mockResolvedValue(
+      [
+        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002'},
+        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02'},
+        { id: 1, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22'}
+      ]
+    );
+
+    const response = await request(app).get('/songs');
+    expect(response.body).toEqual(
+      [
+        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002'},
+        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02'}
+      ]
+    );
+    expect(response.statusCode).toBe(200);
+    expect(response.type).toEqual('application/json');
+  });
+});
+
+/**
  * Unit test /songs/rock middleware doesnt filter any rock songs
  */
 describe('GET /songs/rock', () => {
