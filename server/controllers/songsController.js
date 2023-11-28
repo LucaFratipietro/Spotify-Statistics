@@ -1,6 +1,5 @@
 const { DB } = require('../db/db.js');
 const cache = require('memory-cache');
-// const { extractYear } = require('../utils/utils');
 const db = new DB();
 
 /**
@@ -36,7 +35,7 @@ async function allSongs(req, res) {
 
     // get unique songs
     const uniqueSongs = Array.from(new Set(allSongs.map(song => song.id))).
-      map(id => allSongs.filter(song => song.id === id)).
+      map(id => allSongs.find(song => song.id === id)).
       flat();
 
     if(uniqueSongs.length === 0) {
@@ -123,7 +122,6 @@ async function mostPopularSongs(req, res){
 
   try{
     let mostPopularSongs = cache.get(`mostPopular-${req.params.genre}-${chosenDecade}`);
-    // let mostPopularSongs = await db.getMostPopular(req.params.genre, chosenDecade);
     if(!mostPopularSongs) {
       mostPopularSongs = await db.getMostPopular(req.params.genre, chosenDecade);
     }
@@ -135,7 +133,7 @@ async function mostPopularSongs(req, res){
 
     // get unique songs
     const uniqueSongs = Array.from(new Set(mostPopularSongs.map(song => song.id))).
-      map(id => mostPopularSongs.filter(song => song.id === id)).
+      map(id => mostPopularSongs.find(song => song.id === id)).
       flat();
     
     res.type('json');
@@ -146,25 +144,6 @@ async function mostPopularSongs(req, res){
   }
 
 }
-
-/**
- * Makes a call to the DB object for all years from the DB
- * @returns {JSON} - returns all years from the DB for each song
- */
-// async function allYears(req, res) {
-//   try {
-//     let dates = await db.getAllYears();
-//     dates = await dates.toArray();
-//     const years = dates.map(date => {
-//       return extractYear(date);
-//     });
-//     const uniqueYears = Array.from(new Set(years));
-//     res.status(200).json({years: uniqueYears.sort()});
-//   } catch (e) {
-//     console.error(e.message);
-//     res.sendStatus(404).json({error: e.message});
-//   }
-// }
 
 module.exports = {
   allSongs,

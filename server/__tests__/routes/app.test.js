@@ -8,6 +8,10 @@ const { DB } = require('../../db/db.js');
 
 jest.mock('../../db/db');
 
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 /**
  * Unit test to test /songs API endpoint returns songs in JSON format
  */
@@ -64,7 +68,7 @@ describe('GET /songs', () => {
  * Unit test to test /songs API endpoint to return only songs with unique ids
  */
 describe('GET /songs', () => {
-  test('Respond all objects with release_date being 2002', async () => {
+  test('Reponds with unique songs based on ids', async () => {
     jest.spyOn(DB.prototype, 'getAllSongs').mockResolvedValue(
       [
         { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002'},
