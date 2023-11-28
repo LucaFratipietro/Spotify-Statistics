@@ -108,6 +108,60 @@ router.get('/', songsController.allSongs);
  */
 router.get('/:genre', songsController.allSongsByGenre);
 
+/**
+ * @swagger
+ * /songs/popularity/{genre}:
+ *   get:
+ *     summary: Retrieve the top 60 most popular songs of a given genre
+ *     description: |
+ *       Queries the MongoDB Atlas and returns an ordered list of the most popular
+ *       songs of the given genre, defined by the popularity field
+ *     parameters:
+ *       - in: path
+ *         name: genre
+ *         required: true
+ *         description: Genre string of songs to retrieve
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: The top songs of a given genre param
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   Genre:
+ *                     type: string
+ *                     description: Song genre
+ *                     example: rock
+ *                   Title:
+ *                     type: string
+ *                     description: Song title
+ *                     example: Thriller
+ *                   Album_cover_link:
+ *                     type: string
+ *                     description: Song cover link
+ *                     example: https://i.scdn.co/image/ab67616d0000b273fe24dcd263c08c6dd84b6e8c
+ *                   Artist:
+ *                     type: string
+ *                     description: Song artist(s)
+ *                     example: Swedish House Mafia
+ *                   popularity:
+ *                     type: string
+ *                     description: Song relative popularity (%)
+ *                     example: 92
+ *                   release_date:
+ *                     type: string
+ *                     description: Song release date
+ *                     example: 1975-11-05 or 1975
+ *                   tempo:
+ *                     type: double
+ *                     description: Song tempo scale
+ *                     example: 117.292
+ */
 router.get('/popularity/:genre', songsController.mostPopularSongs);
 
 module.exports = router;
