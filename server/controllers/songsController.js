@@ -34,8 +34,8 @@ async function allSongs(req, res) {
     }
 
     // get unique songs
-    const uniqueSongs = Array.from(new Set(allSongs.map(song => song.id))).
-      map(id => allSongs.find(song => song.id === id)).
+    const uniqueSongs = Array.from(new Set(allSongs.map(song => song.Title))).
+      map(title => allSongs.find(song => song.Title === title)).
       flat();
 
     if(uniqueSongs.length === 0) {
@@ -87,8 +87,8 @@ async function allSongsByGenre(req, res){
     }
     
     // get unique songs
-    const uniqueSongs = Array.from(new Set(songsByGenre.map(song => song.id))).
-      map(id => songsByGenre.filter(song => song.id === id)).
+    const uniqueSongs = Array.from(new Set(songsByGenre.map(song => song.Title))).
+      map(title => songsByGenre.find(song => song.Title === title)).
       flat();
 
     if(uniqueSongs.length === 0){
@@ -132,9 +132,10 @@ async function mostPopularSongs(req, res){
     }
 
     // get unique songs
-    const uniqueSongs = Array.from(new Set(mostPopularSongs.map(song => song.id))).
-      map(id => mostPopularSongs.find(song => song.id === id)).
-      flat();
+    const uniqueSongs = Array.from(new Set(mostPopularSongs.map(song => song.Title))).
+      map(title => mostPopularSongs.find(song => song.Title === title)).
+      flat().
+      slice(0, 50);
     
     res.type('json');
     res.json(uniqueSongs);
