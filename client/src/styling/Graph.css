@@ -7,7 +7,5 @@
 
 .graph {
     height: 70vh;
-    max-width: 125vh; 
-    width: 100%; 
-    margin: auto;
+    width: 60vw; 
 }
