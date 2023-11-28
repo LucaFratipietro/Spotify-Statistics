@@ -8,19 +8,60 @@ nav.light {
     align-items: center;
 }
 
+select {
+    margin-left: 5px;
+    height: fit-content;
+    font-size: 1em;
+    width: fit-content;
+    text-align: center;
+}
+
 option, nav button {
     font-family: "Segoe UI Variable", sans-serif;
+}
+
+form button {
+    height: 3vh;
+    font-size: 1em;
+}
+
+nav.dark {
+    height: fit-content;
+    background-color: #245724;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#discover {
+    width: fit-content;
+    height: fit-content;
+}
+
+nav.dark button, nav.dark select {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+nav.light button, nav.light select {
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+nav.dark label {
+    color: black;
 }
 
 #title-buttons {
     display: flex;
     justify-content: left;
     align-items: center;
-}
-
-form button {
-    height: 3vh;
-    font-size: 1em;
 }
 
 #title-buttons button {
@@ -34,27 +75,26 @@ form button {
 }
 
 #navbar-logo {
-    width: 5%;
+    width: 2rem;
 }
 
 #lightdark {
-    width: 3.5%;
+    width: 2rem;
+    padding: 1em;
 }
 
 .search-label {
     padding-right: 10px;
 }
 
-select {
-    margin-left: 5px;
-    height: fit-content;
-    font-size: 1em;
-    width: fit-content;
+select option {
     text-align: center;
 }
 
-select option {
-    text-align: center;
+#options-theme {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 form {
@@ -63,27 +103,10 @@ form {
     align-items: center;
 }
 
-@media (width < 1121px) {
-    nav {
+@media (width < 700px) {
+    nav.dark {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 1em;
-    }
-
-    nav #title-buttons {
-        display: flex;
-        justify-content: center;
-    }
-
-    #navbar-logo {
-        display: none;
-    }
-
-    form button {
-        height: fit-content;
-        width: fit-content;
-        font-size: 1em;
     }
 }

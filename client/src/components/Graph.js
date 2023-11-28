@@ -5,7 +5,7 @@ import '../styling/Graph.css';
 import * as utils from '../utils/graphUtils';
 import {useEffect, useState} from 'react';
 
-export default function Graph({ songs, genre }) {
+export default function Graph({ songs, genre, theme }) {
 
   const [singleGenre, setSingleGenre] = useState(false);
   const [dataset, setDataset] = useState([]);
@@ -54,6 +54,8 @@ export default function Graph({ songs, genre }) {
   
     generateDataset();
   }, [songs, genre]);
+
+  const labelColor = () => theme === 'light' ? 'black' : 'white';
 
   /**
    * Function to either display graph or loading message
@@ -137,21 +139,29 @@ export default function Graph({ songs, genre }) {
                 datasets: dataset
               }}
               options={{
+                maintainAspectRatio: false,
+                backgroundColor: 'white',
                 scales: {
                   x: {
                     title: {
                       display: true,
-                      text: 'Decade'
+                      text: 'Decade',
+                      color: labelColor()
+                    },
+                    ticks: {
+                      color: labelColor()
                     }
                   },
                   y: {
                     title: {
                       display: true,
-                      text: 'Popularity %'
+                      text: 'Popularity %',
+                      color: labelColor()
                     },
                     ticks: {
                       suggestedMin: 40,
-                      suggestedMax: 100
+                      suggestedMax: 100,
+                      color: labelColor()
                     }
                   }
                 },
