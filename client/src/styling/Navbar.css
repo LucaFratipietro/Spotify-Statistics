@@ -30,7 +30,6 @@ nav.dark {
     background-color: #245724;
     padding: 0 10px;
     display: flex;
-    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
 }
@@ -43,7 +42,7 @@ nav.dark {
 nav.dark button, nav.dark select {
     background-color: black;
     color: white;
-    border: 1px solid white;
+    border: 1px solid black;
     border-radius: 5px;
 }
 
@@ -75,11 +74,11 @@ nav.dark label {
 }
 
 #navbar-logo {
-    width: 5%;
+    width: 2rem;
 }
 
 #lightdark {
-    width: 4%;
+    width: 2rem;
     padding: 1em;
 }
 
@@ -93,7 +92,7 @@ select option {
 
 #options-theme {
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -101,4 +100,10 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (width <= 80vw) {
+    nav.dark {
+        background-color: red;
+    }
 }
