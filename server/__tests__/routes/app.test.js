@@ -65,15 +65,15 @@ describe('GET /songs', () => {
 });
 
 /**
- * Unit test to test /songs API endpoint to return only songs with unique ids
+ * Unit test to test /songs API endpoint to return only songs with unique title
  */
 describe('GET /songs', () => {
-  test('Reponds with unique songs based on ids', async () => {
+  test('Reponds with unique songs based on title', async () => {
     jest.spyOn(DB.prototype, 'getAllSongs').mockResolvedValue(
       [
         { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002'},
-        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02'},
-        { id: 1, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22'}
+        { id: 1, Genre : 'pop', Title : 'The first Song', Artist : 'The Strokes', release_date: '1978-11-02'},
+        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22'}
       ]
     );
 
@@ -81,7 +81,7 @@ describe('GET /songs', () => {
     expect(response.body).toEqual(
       [
         { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002'},
-        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02'}
+        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22'},
       ]
     );
     expect(response.statusCode).toBe(200);
@@ -184,23 +184,23 @@ describe('GET /songs/popularity/genre', () => {
 });
 
 /**
- * Unit test /songs/popularity/genre to filter same id
+ * Unit test /songs/popularity/genre to filter same title
  */
 describe('GET /songs/popularity/genre', () => {
-  test('filters the songs with the same id', async () => {
+  test('filters the songs with the same title', async () => {
     jest.spyOn(DB.prototype, 'getMostPopular').mockResolvedValue(
       [
-        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 98},
+        { id: 0, Genre : 'rock', Title : 'The second', Artist : 'The Who', release_date: '2002', popularity: 98},
         { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02', popularity: 75},
-        { id: 1, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 45}
+        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 45}
       ]
     );
 
     const response = await request(app).get('/songs/popularity/rock');
     expect(response.body).toEqual(
       [
-        { id: 0, Genre : 'rock', Title : 'The first Song', Artist : 'The Who', release_date: '2002', popularity: 98},
-        { id: 1, Genre : 'pop', Title : 'The second', Artist : 'The Strokes', release_date: '1978-11-02', popularity: 75}
+        { id: 0, Genre : 'rock', Title : 'The second', Artist : 'The Who', release_date: '2002', popularity: 98},
+        { id: 2, Genre : 'rap', Title : 'Sleep', Artist : 'GodSpeed you!', release_date: '2002-07-22', popularity: 45}
       ]
     );
     expect(response.statusCode).toBe(200);
