@@ -35,7 +35,7 @@ The application is currently deployed through AWS at `99.79.36.74`. Accessing th
 
 1. In one terminal, ssh to the VPS using the private key (`ssh -i <path to private key> bitnami@99.79.36.74`)
 2. In the VPS, if there currently is a folder called `project`, remove it and its contents.
-3. On your local machine, download the artifacts folder in GitLab (Build > Artifacts > Dropdown for **build-app-archive** job > Download **artifacts.zip**) 
+3. On your local machine, download the latest artifacts folder in GitLab (Build > Artifacts > Dropdown for **build-app-archive** job > Download **artifacts.zip**) 
 4. Extract contents of the zip
 5. In the location of where you downloaded the artifacts, `cd artifacts` and there should rest a folder called `project` 
 6. Copy this folder into the VPS (`scp -r -i <path to private key> project/ bitnami@99.79.36.74:~`)
@@ -55,3 +55,11 @@ The application is currently deployed through AWS at `99.79.36.74`. Accessing th
 14. Apache is already setup to run on the port of the server, but restarting may be required in order to see new changes from the code coming in from the tag from your local machine. Restart Apache (`sudo /opt/bitnami/ctlscript.sh restart apache`)
 15. If `Restarted apache` is returned to the console, then redeployment was successful and you can now access the application at **http://99.79.36.74/**
 16. Enjoy the statistics!
+
+## Attributions
+>[Spotify Dataset](https://www.kaggle.com/datasets/naoh1092/spotify-genre-audio-features/) provided by Noah
+
+>[Spotify Playlist Data](https://everynoise.com/everynoise1d.cgi) provided by Every Noise at Once API
+
+## Dependencies
+>Graph generated using [Chart.js](https://www.chartjs.org/)
