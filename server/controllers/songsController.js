@@ -1,6 +1,5 @@
 const { DB } = require('../db/db.js');
 const cache = require('memory-cache');
-// const { extractYear } = require('../utils/utils');
 const db = new DB();
 
 /**
@@ -35,8 +34,8 @@ async function allSongs(req, res) {
     }
 
     // get unique songs
-    const uniqueSongs = Array.from(new Set(allSongs.map(song => song.id))).
-      map(id => allSongs.filter(song => song.id === id)).
+    const uniqueSongs = Array.from(new Set(allSongs.map(song => song.Title))).
+      map(title => allSongs.find(song => song.Title === title)).
       flat();
 
     if(uniqueSongs.length === 0) {
@@ -62,48 +61,45 @@ async function allSongs(req, res) {
  */
 
 async function allSongsByGenre(req, res){
-  // if(req.params.genre.toLowerCase().trim() === 'years') {
-  //   allYears(req, res);
-  // } else {
+  
   try {
-    let songsByGenre = cache.get('songsByGenre');
+    let songsByGenre = cache.get(`songsByGenre-${req.params.genre}`);
     if(!songsByGenre) {
-      songsByGenre = await db.getAllSongs(req.params.genre);
+      songsByGenre = await db.getAllSongsOfGenre(req.params.genre);
     }
     
     if(!Array.isArray(songsByGenre)){
       songsByGenre = await songsByGenre.toArray();
-      cache.put('songsByGenre', songsByGenre);
+      cache.put(`songsByGenre-${req.params.genre}`, songsByGenre);
     }
     
     //check if query param for year was passed, if so, filter results by year
     if(req.query.year){
-      
-      songsByGenre = cache.get(`songsByGenre-${req.query.year}`);
-      if(!songsByGenre) {
-        songsByGenre = songsByGenre.filter((song) => {
-          return song.release_date.includes(req.query.year);
-        });
-        cache.put(`songsByGenre-${req.query.year}`, songsByGenre); 
+      // eslint-disable-next-line max-len
+      const songsByGenreYearFilter = cache.get(`songsByGenre-${req.params.genre}-${req.query.year}`);
+      if(songsByGenreYearFilter) {
+        songsByGenre = songsByGenreYearFilter;
       }
+      songsByGenre = songsByGenre.filter((song) => {
+        return song.release_date.includes(req.query.year);
+      });
+      cache.put(`songsByGenre-${req.params.genre}-${req.query.year}`, songsByGenre); 
     }
-
+    
     // get unique songs
-    const uniqueSongs = Array.from(new Set(songsByGenre.map(song => song.id))).
-      map(id => songsByGenre.filter(song => song.id === id)).
+    const uniqueSongs = Array.from(new Set(songsByGenre.map(song => song.Title))).
+      map(title => songsByGenre.find(song => song.Title === title)).
       flat();
 
     if(uniqueSongs.length === 0){
-      res.type('json');
-      res.status(404).json({error: `Genre ${req.params.genre} 
-      did not return any results. Try another genre`});
+      // eslint-disable-next-line max-len
+      res.status(404).json({error: `Genre ${req.params.genre} did not return any results. Try another genre`});
       return;
     }
 
     res.type('json');
     res.json(uniqueSongs);
   } catch (e) {
-    console.error(e.message);
     res.sendStatus(500).json({error: e.message});
   }
   // }
@@ -126,7 +122,6 @@ async function mostPopularSongs(req, res){
 
   try{
     let mostPopularSongs = cache.get(`mostPopular-${req.params.genre}-${chosenDecade}`);
-    // let mostPopularSongs = await db.getMostPopular(req.params.genre, chosenDecade);
     if(!mostPopularSongs) {
       mostPopularSongs = await db.getMostPopular(req.params.genre, chosenDecade);
     }
@@ -137,9 +132,10 @@ async function mostPopularSongs(req, res){
     }
 
     // get unique songs
-    const uniqueSongs = Array.from(new Set(mostPopularSongs.map(song => song.id))).
-      map(id => mostPopularSongs.filter(song => song.id === id)).
-      flat();
+    const uniqueSongs = Array.from(new Set(mostPopularSongs.map(song => song.Title))).
+      map(title => mostPopularSongs.find(song => song.Title === title)).
+      flat().
+      slice(0, 50);
     
     res.type('json');
     res.json(uniqueSongs);
@@ -149,29 +145,6 @@ async function mostPopularSongs(req, res){
   }
 
 }
-
-/**
- * Makes a call to the DB object for all years from the DB
- * @returns {JSON} - returns all years from the DB for each song
- */
-// async function allYears(req, res) {
-//   try {
-//     let dates = await db.getAllYears();
-//     dates = await dates.toArray();
-//     const years = dates.map(date => {
-//       return extractYear(date);
-//     });
-//     const uniqueYears = Array.from(new Set(years));
-//     res.status(200).json({years: uniqueYears.sort()});
-//   } catch (e) {
-//     console.error(e.message);
-//     res.sendStatus(404).json({error: e.message});
-//   }
-// }
-
-/*async function topSongsByYear(req, res){
-  //STUB: NOT IMPLEMENTED
-}*/
 
 module.exports = {
   allSongs,

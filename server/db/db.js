@@ -64,6 +64,21 @@ class DB {
   }
 
   /**
+   * Method to get all songs queried from the database of a certain genre
+   * 
+   * @param {string} genre | parameter for getting a certain genre
+   * @returns {Cursor} cursor of query values
+   */
+  async getAllSongsOfGenre(genre) {
+    
+    //return only required fields
+    const projection = { Genre : 1, Title: 1, Album_cover_link: 1, popularity: 1,
+      release_date: 1, tempo: 1};
+      
+    return await instance.collection.find({ Genre: genre }).project(projection);
+  }
+
+  /**
    * Method to remove all data from the database
    * 
    * @returns {Document} metadata from data deleted
@@ -89,7 +104,7 @@ class DB {
     const sort = { popularity: -1 };
     const projection = { Genre : 1, Artist: 1, Title: 1, Album_cover_link: 1, popularity: 1,
       release_date: 1};
-    return await instance.collection.find(query).sort(sort).limit(50).project(projection);
+    return await instance.collection.find(query).sort(sort).limit(60).project(projection);
     
   }
 }
