@@ -47,7 +47,7 @@ The application is currently deployed through AWS at `99.79.36.74`. Accessing th
 
 **ITS VERY IMPORTANT THAT YOU ARE IN THE `project` FOLDER UP TO THIS POINT! BY RUNNING `ls -al`, THERE SHOULD ONLY REST THE `client`, `server`, `.env` & `release....tar.gz` tarball**
 
-12. Once the jobs are cleared in `forever`, you need to set the `NODE_ENV` variable to set the environment of the application and start the application using `forever` (`NODE_ENV=production forever start server/bin/www`)
+12. Once the jobs are cleared in `forever`, you need to set the `NODE_ENV` variable to set the environment of the application and start the application using `forever`. Luckily, that is already set in the `.env` file, so all thats needed is to run the application (`forever start server/bin/www`)
 13. Verify that the application started using `forever list` and see something along these lines:
     > data:    [`process index`] `job` /opt/bitnami/node/bin/node server/bin/www `forever pid`   `id`    /home/bitnami/.forever/`job`.log `runtime`
 
