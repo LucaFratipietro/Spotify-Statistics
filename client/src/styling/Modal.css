@@ -11,7 +11,7 @@
     z-index: 999;
 }
 
-.modal-content {
+.modal-content.light {
     background-color: #fff;
     padding: 50px;
     box-shadow: 0 0 10px rgba(0 0 0 / 20%);
@@ -20,6 +20,26 @@
     overflow: auto;
     position: relative;
     border-radius: 50px;
+}
+
+.modal-content.dark {
+    background-color: #000;
+    color: white;
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(0 0 0 / 20%);
+    max-width: 30%; 
+    max-height: 100%;
+    overflow: auto;
+    position: relative;
+    border-radius: 50px;
+}
+
+.modal-content.dark a {
+    color: white;
+}
+
+.modal-content.light a {
+    color: black;
 }
 
 #modal-content {
